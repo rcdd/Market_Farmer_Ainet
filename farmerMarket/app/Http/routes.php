@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/* // EG.:
+ // EG.:
 Route::get('users', 'UserController@list');
 Route::get('users/create', 'UserController@create');
 Route::post('users/create', 'UserController@store');
 Route::get('users/edit/{id}', 'UserController@edit');
 Route::post('users/delete/{id}', 'UserController@delete');
-*/
+Route::post('login', 'UserController@login');

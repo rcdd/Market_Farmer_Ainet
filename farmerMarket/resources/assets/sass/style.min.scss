@@ -12,3 +12,8 @@
 	font-family: armata;
 }
 
+.carousel-inner > .item > img, .carousel-inner > .item.active >img {
+    margin: 0 auto;
+    width: 58%;
+    height: 70%; 
+}

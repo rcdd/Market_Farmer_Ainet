@@ -20,7 +20,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Market LOGO</a>
+      <a class="navbar-brand" href="/">Market LOGO</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -42,7 +42,7 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Login</a></li>
+        <li><a  data-toggle="modal" data-target="#myModal" href="#">Login</a></li>
       </ul>
 
      <form class="navbar-form navbar-right" role="search">
@@ -57,69 +57,43 @@
 </nav>
     <!-- END NAV SECTION -->
 
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
-<style>
-.carousel-inner > .item > img, .carousel-inner > .item.active >img {
-    margin: 0 auto;
-    width: 58%;
-    height: 70%; 
-}
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Login</h4>
+      </div>
+        <div class="modal-body">
+          <form action="login" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd" name="pwd">
 
-</style>
+                <label for="rem">Remember Me </label>
+                <input type="checkbox" id="rem" name="rem"> 
+
+                <input type="hidden" name="_token" value="{{ csrf_token() }}" >
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default" >Login</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+          </form>
+        </div>
+    </div>
+  </div>
+</div>
 
           
-    <!-- SLIDESHOW -->
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-          <!-- Indicators -->
-          <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-          </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                  <img src="{{ asset('assets/images/market1.jpg') }}" alt="...">
-                  <div class="carousel-caption">
-                    ...
-                  </div>
-            </div>
-
-            <div class="item">
-                  <img src="{{ asset('assets/images/market2.jpg') }}" alt="...">
-                  <div class="carousel-caption">
-                    ...
-                  </div>
-            </div>
-
-            <div class="item">
-                  <img src="{{ asset('assets/images/market3.jpg') }}" alt="...">
-                  <div class="carousel-caption">
-                    ...
-                  </div>
-            </div>
-
-            <div class="item">
-                  <img src="{{ asset('assets/images/market4.jpg') }}" alt="...">
-                  <div class="carousel-caption">
-                    ...
-                  </div>
-            </div>
-        </div>
-
-          <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-    </div>
-
-    <!-- END SLIDESHOW -->
+ <br />          
+ <br />
 
 
     <div class="container-fluid text-center">
