@@ -32,12 +32,10 @@ class UserController extends Controller
         // executar validate()
         $this->validate($request, $rules);
 
-        /*$password = $request::get('password');
-        $request['password'] = password_hash ($password);
-		*/
 		
         // gravar na DB
         $input = $request->all();
+        $input['password'] =  password_hash ( $input['password'], PASSWORD_DEFAULT); 
         User::create($input);
 
         // redirect para a vista seguinte
@@ -51,39 +49,6 @@ class UserController extends Controller
 
     public function delete($id){
     	return "Delete Users $id";
-    }
-
-    public function login(){
-    	$users = User::all();
-			$email = $_POST['email'];
-			$password = $_POST['pwd'];
-			//$email = input_value('email');
-			//$password = input_value('pwd');
-
-
-            if($user = $this->findByEmail($email)){
-            	if(password_verify($password , $user->password)) {
-					$_SESSION['login'] = $user->email;
-					$_SESSION['name'] = $user->fullname;
-					$_SESSION['type'] = $user->type;
-					return "OK";
-					//$this->redirectToHome();
-				}
-			}
-			return "Not login";
-    	//return $this->list();
-
-
-    }
-
-    public function findByEmail($userEmail){
-        $users = User::all();
-        foreach ($users as $user){
-            if($userEmail==$user->email){
-                return $user;
-            }
-        }
-        return;
     }
 
 }
