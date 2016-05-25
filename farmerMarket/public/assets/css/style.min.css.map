@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,UAKC,CAJA,WAAW,CAAE,QAAQ,CACrB,GAAG,CAAG,kCAAkC,CACxC,WAAW,CAAE,MAAM,CACnB,UAAU,CAAE,MAAM,CAGnB,KAAK,CACJ,SAAS,CAAG,IAAI,CAChB,WAAW,CAAE,MAAM",
+"sources": ["../../../resources/assets/sass/style.min.scss"],
+"names": [],
+"file": "style.min.css"
+}

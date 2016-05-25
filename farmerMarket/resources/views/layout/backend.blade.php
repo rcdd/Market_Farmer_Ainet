@@ -5,11 +5,12 @@
         <title>@yield('title')</title>
         <!-- Latest compiled and minified CSS & JS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="assets/css/style.min.css">
+
 </head>
 <body>
     <!-- NAV SECTION -->
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -48,7 +49,7 @@
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default">Search</button>
       </form>
 
     </div><!-- /.navbar-collapse -->
@@ -57,17 +58,80 @@
     <!-- END NAV SECTION -->
 
 
-    <div class="container-fluid">
-        <div class="row">
-          <h1>@yield('title')</h1>
+<style>
+.carousel-inner > .item > img, .carousel-inner > .item.active >img {
+    margin: 0 auto;
+    width: 58%;
+    height: 70%; 
+}
 
-          <p> imagem de logo </p>
+</style>
+
+          
+    <!-- SLIDESHOW -->
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                  <img src="{{ asset('assets/images/market1.jpg') }}" alt="...">
+                  <div class="carousel-caption">
+                    ...
+                  </div>
+            </div>
+
+            <div class="item">
+                  <img src="{{ asset('assets/images/market2.jpg') }}" alt="...">
+                  <div class="carousel-caption">
+                    ...
+                  </div>
+            </div>
+
+            <div class="item">
+                  <img src="{{ asset('assets/images/market3.jpg') }}" alt="...">
+                  <div class="carousel-caption">
+                    ...
+                  </div>
+            </div>
+
+            <div class="item">
+                  <img src="{{ asset('assets/images/market4.jpg') }}" alt="...">
+                  <div class="carousel-caption">
+                    ...
+                  </div>
+            </div>
+        </div>
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+    </div>
+
+    <!-- END SLIDESHOW -->
+
+
+    <div class="container-fluid text-center">
+        <div class="row">
+              <h2>@yield('title')</h2>
         </div>
     </div>
 
 
     <div>
     @yield('content')
+    <br />
     </div>
 
     <div class="container-fluid panel-footer">

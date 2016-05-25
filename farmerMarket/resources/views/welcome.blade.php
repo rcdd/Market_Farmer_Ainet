@@ -1,45 +1,18 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layout.backend')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('title', 'Growing strong')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+@section('content')
+        <div class="container-fluid">
+            <div class="text">
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+Founded in 1994, Urban Harvest has garnered a well-deserved reputation as a leader in the local food movement. We've earned this role by adhering to clear and simple values and a focused mission:
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+Urban Harvest encourages community, good nutrition and sustainability through the teaching and support of organic gardening.
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+Under the direction of an all-volunteer board, Urban Harvest has grown from humble beginnings to employ a full-time staff and literally thousands of volunteers. Funding comes from nearly 1,500 annual memberships, and from individual and corporate donations, private foundations, and public grants.
 
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
             </div>
         </div>
-    </body>
-</html>
+
+@endsection

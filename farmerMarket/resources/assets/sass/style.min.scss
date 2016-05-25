@@ -1,0 +1,14 @@
+// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+@font-face{
+	font-family: 'armata';
+	src:  url('../fonts/Armata-Regular.otf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.text{
+	font-size : 15px;
+	font-family: armata;
+}
+

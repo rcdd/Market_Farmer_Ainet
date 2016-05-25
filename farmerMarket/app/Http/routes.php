@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('layout.backend');
+    return view('welcome');
 });
 
 /* // EG.:
