@@ -26,7 +26,8 @@ class UserController extends Controller
             'name'  => 'Required|Min:3|Max:80|Alpha',
             'email'     => 'Required|Between:3,64|Email|Unique:users',
             'password'  =>'Required|AlphaNum|Between:4,8|Confirmed',
-            'password_confirmation'=>'Required|AlphaNum|Between:4,8'
+            'password_confirmation'=>'Required',
+            'photo'       => 'mimes:png',
         );
 
         // executar validate()
@@ -35,8 +36,17 @@ class UserController extends Controller
 		
         // gravar na DB
         $input = $request->all();
-        $input['password'] =  password_hash ( $input['password'], PASSWORD_DEFAULT); 
-        User::create($input);
+
+        User::create([
+        	'name'  => $input['name'],
+            'email'     => $input['email'],
+        	'password' => password_hash ( $input['password'], PASSWORD_DEFAULT), 
+        	'admin' => $request->has('admin'),
+        	'location' => $input['location'],
+        	'presentation' => $input['presentation'],
+        	'profile_url' => $input['profile_url'],
+
+        ]);
 
         // redirect para a vista seguinte
         return $this->list();

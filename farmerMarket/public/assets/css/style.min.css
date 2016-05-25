@@ -1,2 +1,2 @@
-@font-face{font-family:'armata';src:url("../fonts/Armata-Regular.otf");font-weight:normal;font-style:normal}.text{font-size:15px;font-family:armata}.carousel-inner>.item>img,.carousel-inner>.item.active>img{margin:0 auto;width:58%;height:70%}
+@font-face{font-family:'armata';src:url("../fonts/Armata-Regular.otf");font-weight:normal;font-style:normal}.text{font-size:15px;font-family:armata}.carousel-inner>.item>img,.carousel-inner>.item.active>img{margin:0 auto;width:58%;height:70%}.required:after{content:" *";color:red}
 /*# sourceMappingURL=style.min.css.map */

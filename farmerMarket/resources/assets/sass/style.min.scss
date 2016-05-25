@@ -17,3 +17,8 @@
     width: 58%;
     height: 70%; 
 }
+
+.required:after { 
+	content:" *"; 
+	color: red;
+}

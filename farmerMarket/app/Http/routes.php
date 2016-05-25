@@ -17,8 +17,8 @@ Route::get('/', function () {
 
  // EG.:
 Route::get('users', ['middleware'=>'auth','UserController@list']);
-Route::get('users/create', 'UserController@create');
-Route::post('users/create', 'UserController@store');
+//Route::get('users/create', 'UserController@create');
+//Route::post('users/create', 'UserController@store');
 Route::get('users/edit/{id}', ['middleware'=>'auth','UserController@edit']);
 Route::post('users/delete/{id}', ['middleware'=>'auth', 'UserController@delete']);
 //Route::post('login', 'UserController@l');
@@ -31,3 +31,4 @@ Route::post('login', ['middleware'=>'auth', function(){
 
 Route::auth();
 Route::get('/home', 'HomeController@index');
+Route::post('/register', 'UserController@store');

@@ -11,7 +11,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Name</label>
+                            <label class="col-md-4 control-label required">Name</label>
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="name" value="{{ old('name') }}">
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+                            <label class="col-md-4 control-label required">E-Mail Address</label>
 
                             <div class="col-md-6">
                                 <input type="email" class="form-control" name="email" value="{{ old('email') }}">
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
+                            <label class="col-md-4 control-label required">Password</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password">
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Confirm Password</label>
+                            <label class="col-md-4 control-label required">Confirm Password</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password_confirmation">
@@ -65,6 +65,52 @@
                                 @endif
                             </div>
                         </div>
+
+                         <div class="form-group{{ $errors->has('admin') ? ' has-error' : '' }}">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="admin"> Administrator
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <!-- OPTIONAL INPUTS -->
+                        <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Location:</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="location" value="{{ old('location') }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('presentation') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Presentation:</label>
+
+                            <div class="col-md-6">
+                                <textarea type="text" class="form-control" name="presentation" value="{{ old('presentation') }}"> </textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Photo:</label>
+
+                            <div class="col-md-6">
+                                <input type="file" class="" name="profile_photo" value="{{ old('profile_photo') }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('profile_url') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Profile URL:</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="profile_url" value="{{ old('profile_url') }}">
+                            </div>
+                        </div>
+
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
