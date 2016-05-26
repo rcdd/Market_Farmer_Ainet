@@ -16,19 +16,15 @@ Route::get('/', function () {
 });
 
  // EG.:
-Route::get('users', ['middleware'=>'auth','UserController@list']);
-//Route::get('users/create', 'UserController@create');
-//Route::post('users/create', 'UserController@store');
-Route::get('users/edit/{id}', ['middleware'=>'auth','UserController@edit']);
-Route::post('users/delete/{id}', ['middleware'=>'auth', 'UserController@delete']);
-//Route::post('login', 'UserController@l');
+Route::get('users', ['middleware'=>'auth','uses' => 'UserController@list']);
 
+Route::get('users/edit/{id}', ['middleware'=>'auth','uses' => 'UserController@edit']);
+Route::post('users/update/{id}', ['middleware'=>'auth','uses' => 'UserController@update']);
 
-Route::post('login', ['middleware'=>'auth', function(){
-	
-}]);
-
+//Route::post('users/delete/{id}', ['middleware'=>'auth', 'uses' => 'UserController@delete']);
 
 Route::auth();
 Route::get('/home', 'HomeController@index');
+
+Route::get('/register', 'UserController@register');
 Route::post('/register', 'UserController@store');

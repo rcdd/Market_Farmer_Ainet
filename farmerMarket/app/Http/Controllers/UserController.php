@@ -10,14 +10,16 @@ use App\User;
 class UserController extends Controller
 {
     public function list(){
+
     	$title = "Listagem de Utilizadores";
     	$users = User::all();
 
     	return view('users.index', compact('title', 'users'));
     }
 
-    public function create(){
-    	return view('users.add', compact('title'));
+    public function register(){
+    	$user = new User;
+    	return view('auth.register', compact('user'));
     }
 
 	public function store(Request $request){
@@ -27,7 +29,6 @@ class UserController extends Controller
             'email'     => 'Required|Between:3,64|Email|Unique:users',
             'password'  =>'Required|AlphaNum|Between:4,8|Confirmed',
             'password_confirmation'=>'Required',
-            'photo'       => 'mimes:png',
         );
 
         // executar validate()
@@ -45,17 +46,42 @@ class UserController extends Controller
         	'location' => $input['location'],
         	'presentation' => $input['presentation'],
         	'profile_url' => $input['profile_url'],
-
         ]);
 
         // redirect para a vista seguinte
-        return $this->list();
+        return view('home');
     }
 
     public function edit($id){
+    	$user = User::findOrFail($id);
     	//return view('users.edit', ['id' => $id]);
-    	return view('users.edit', compact('id'));
+    	return view('auth.edit', compact('id', 'user'));
     }
+
+    public function update($id, Request $request)
+	{
+	    $user = User::findOrFail($id);
+	    
+	    $rules = array(
+            'name'  => 'Required|Min:3|Max:80|Alpha',
+            'email'     => 'Required|Between:3,64|Email',
+            'password'  =>'Required|AlphaNum|Between:4,8|Confirmed',
+            'password_confirmation'=>'Required',
+        );
+
+        // executar validate()
+        $this->validate($request, $rules);
+
+	    $input = $request->all();
+		$user->fill($input);
+
+	    $user->password = password_hash ( $input['password'], PASSWORD_DEFAULT);
+	    $user->admin = $request->has('admin');
+
+	   	$user->save();
+
+	    return view('home');
+	}
 
     public function delete($id){
     	return "Delete Users $id";
