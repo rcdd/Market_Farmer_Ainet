@@ -87,7 +87,6 @@
 
                         <div class="form-group">
                             <label class="col-md-4 control-label">Photo:</label>
-
                             <div class="col-md-6">
                                 <input type="file" class="" name="profile_photo" value="{{ old('profile_photo', $user->profile_photo) }}">
                             </div>

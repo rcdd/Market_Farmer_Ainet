@@ -6,7 +6,7 @@
         <div class="container">
             <div class="content">            
                 
-                <form action="users-edit.php" method="post" class="form-group">
+                <form action="users-edit.php" method="post" class="form-group" enctype="multipart/form-data">
                     <input type="hidden" name="user_id" value="{{ $id }}" />
                     <div class="form-group">
                         @include('users.partials.add-edit')

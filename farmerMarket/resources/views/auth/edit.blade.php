@@ -7,11 +7,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">@yield('title')</div>
                 <div class="panel-body">
-            		<form class="form-horizontal" role="form" method="POST" action="{{ url('/users/update/'.$id) }}">
+            		<form class="form-horizontal" role="form" method="POST" action="{{ url('/users/update/'.$id) }}"  enctype="multipart/form-data">
                   		@include('auth.partials.form')
-                  		<div class="form-group">
+                  		<div class="form-group" >
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     <i class="fa fa-btn fa-check "></i>Update
                                 </button>
                             </div>

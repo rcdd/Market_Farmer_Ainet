@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\User;
 
@@ -45,6 +44,7 @@ class UserController extends Controller
         	'admin' => $request->has('admin'),
         	'location' => $input['location'],
         	'presentation' => $input['presentation'],
+        	'profile_photo' => $input['profile_photo'],
         	'profile_url' => $input['profile_url'],
         ]);
 
@@ -72,15 +72,18 @@ class UserController extends Controller
         // executar validate()
         $this->validate($request, $rules);
 
+
 	    $input = $request->all();
 		$user->fill($input);
 
 	    $user->password = password_hash ( $input['password'], PASSWORD_DEFAULT);
 	    $user->admin = $request->has('admin');
+	    $user->profile_photo = $user->id . '_' . $request->file('profile_photo')->getClientOriginalName();
+        $request->file('profile_photo')->move(base_path() . '/public/assets/uploads/users/', $user->profile_photo);
 
 	   	$user->save();
 
-	    return view('home');
+	    return redirect('/home');
 	}
 
     public function delete($id){

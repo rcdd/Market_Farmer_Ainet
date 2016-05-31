@@ -28,3 +28,10 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/register', 'UserController@register');
 Route::post('/register', 'UserController@store');
+
+
+///// products
+
+Route::get('/advertisement/view', ['middleware'=>'auth','uses' => 'AdvertisementController@index']);
+Route::get('/advertisement/new', ['middleware'=>'auth','uses' => 'AdvertisementController@newProduct']);
+Route::post('/advertisement/save', ['middleware'=>'auth','uses' => 'AdvertisementController@add']);
