@@ -62,7 +62,7 @@
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
                         {{-- url('/images/profile/'. Auth::user()->id ) --}} 
-                        <li><img src="{{ url('/assets/uploads/users/'. Auth::user()->profile_photo ) }}" alt="Profile Picture" width="50px" height="50px"></li>
+                        <li><img src="{{ url('/images/profile/'. Auth::user()->id ) }}" alt="Profile Picture" width="50px" height="50px"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
