@@ -60,14 +60,14 @@
                         <li><a data-toggle="modal" data-target="#myModal" href="#">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
-                        <li><img src="{{ url('/assets/uploads/users/'. Auth::user()->profile_photo ) }}" alt="Profile Picture" width="50px" height="50px">  </li>
+                        <li><img src="{{ url('/assets/uploads/users/'. Auth::user()->profile_photo ) }}" alt="Profile Picture" width="50px" height="50px"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/users/edit/'. Auth::user()->id ) }}"><i class="fa fa-btn fa-user"></i>Profile</a></li>
+                                <li><a href="{{ url('/users/edit/'. Auth::user()->id ) }}"><i class="fa fa-btn fa-user"></i> Profile</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
