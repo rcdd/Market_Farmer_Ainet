@@ -10,7 +10,7 @@
                 @foreach ($advertisements as $advertisement)
                     <div class="row col-md-4">
                         <div class="col-sm-6">
-                            <img src="/assets/images/market2.jpg" alt="..." width="140" height="140" class="img-rounded">
+                            <img src="/images/ads/{{$advertisement->id}}" alt="Image Product" width="140" height="140" class="img-rounded"> </img> 
                         </div>
 
                         <div class="col-sm-6">

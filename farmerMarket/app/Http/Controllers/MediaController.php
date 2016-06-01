@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
 
 use App\User;
+use App\Advertisement;
  
 class MediaController extends Controller {
  
@@ -45,6 +46,16 @@ class MediaController extends Controller {
 		$file = Storage::disk('local')->get("profile/". $user->profile_photo);
 
 		return (new Response($file, 200))->header('Content-Type', $user->mime_type);
+
+	}
+
+	public function getImageAds($id){
+		$ads = Advertisement::findOrFail($id);
+		$media = new Media();
+		$photo = $media->where('advertisement_id', '=', $ads->id)->firstOrFail();
+		$file = Storage::disk('local')->get("ads/". $photo->photo_path);
+
+		return (new Response($file, 200))->header('Content-Type', $photo->mime_type);
 
 	}
 }

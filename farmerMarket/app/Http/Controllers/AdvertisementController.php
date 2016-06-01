@@ -11,6 +11,8 @@ use Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
  
+use App\Media;
+
 class AdvertisementController extends Controller
 {
  
@@ -29,26 +31,34 @@ class AdvertisementController extends Controller
     }
  
     public function add() {
- 
-        /*$file = Request::file('file');
-        $extension = $file->getClientOriginalExtension();
-        Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
- 
-        $entry = new \App\File();
-        $entry->mime = $file->getClientMimeType();
-        $entry->original_filename = $file->getClientOriginalName();
-        $entry->filename = $file->getFilename().'.'.$extension;
- 
-        $entry->save();
- */
+
         $advertisement  = new Advertisement();
         $advertisement->owner_id=Request::input('owner_id');
         $advertisement->name =Request::input('name');
         $advertisement->description =Request::input('description');
         $advertisement->price_cents =Request::input('price_cents');
-        //$product->imageurl =Request::input('imageurl');
- 
+        $advertisement->available_on =Request::input('available_on');
+        $advertisement->available_until =Request::input('available_until');
+        $advertisement->trade_prefs =Request::input('trade_prefs');
+        $advertisement->quantity =Request::input('quantity');
+
         $advertisement->save();
+
+        //image field
+        $file = Request::file('photo_path');
+        $extension = $file->getClientOriginalExtension();
+        Storage::disk('local')->put("ads/" . $file->getFilename().'.'.$extension,  File::get($file));
+ 
+
+        $media = new Media();
+        $media->mime_type = $file->getClientMimeType();
+        $media->photo_path = $file->getFilename().'.'.$extension;
+
+        //$advertisement->integer('id')->unsigned();
+        $media->advertisement_id = $advertisement->id;
+        //end image field
+
+        $media->save();
  
         return redirect('/advertisement/view');
  
