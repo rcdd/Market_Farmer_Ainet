@@ -36,6 +36,8 @@ class UserController extends Controller
 		
         // gravar na DB
         $input = $request->all();
+        $profile_photo = $request->file('profile_photo')->getClientOriginalName();
+        $request->file('profile_photo')->move(base_path() . '/public/assets/uploads/users/', $profile_photo);
 
         User::create([
         	'name'  => $input['name'],
@@ -44,7 +46,7 @@ class UserController extends Controller
         	'admin' => $request->has('admin'),
         	'location' => $input['location'],
         	'presentation' => $input['presentation'],
-        	'profile_photo' => $input['profile_photo'],
+        	'profile_photo' => $profile_photo,
         	'profile_url' => $input['profile_url'],
         ]);
 
@@ -79,6 +81,7 @@ class UserController extends Controller
 	    $user->password = password_hash ( $input['password'], PASSWORD_DEFAULT);
 	    $user->admin = $request->has('admin');
 	    $user->profile_photo = $user->id . '_' . $request->file('profile_photo')->getClientOriginalName();
+
         $request->file('profile_photo')->move(base_path() . '/public/assets/uploads/users/', $user->profile_photo);
 
 	   	$user->save();
