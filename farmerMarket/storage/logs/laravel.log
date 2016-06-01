@@ -7625,6 +7625,7 @@ Stack trace:
 #61 /home/vagrant/Project/Code/farmerMarket/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(99): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #62 /home/vagrant/Project/Code/farmerMarket/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #63 {main}  
+<<<<<<< HEAD
 [2016-06-01 15:29:16] production.ERROR: RuntimeException: No supported encrypter found. The cipher and / or key length are invalid. in /home/vagrant/Code/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php:45
 Stack trace:
 #0 /home/vagrant/Code/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php(25): Illuminate\Encryption\EncryptionServiceProvider->getEncrypterForKeyAndCipher(NULL, 'AES-256-CBC')
@@ -8135,3 +8136,57 @@ Stack trace:
 #56 /home/vagrant/Code/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(99): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #57 /home/vagrant/Code/Market_Farmer_Ainet/farmerMarket/public/index.php(53): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #58 {main}  
+=======
+[2016-06-01 15:47:15] production.ERROR: PDOException: SQLSTATE[HY000] [1045] Access denied for user 'forge'@'localhost' (using password: NO) in /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:55
+Stack trace:
+#0 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(55): PDO->__construct('mysql:host=loca...', 'forge', '', Array)
+#1 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connectors/MySqlConnector.php(24): Illuminate\Database\Connectors\Connector->createConnection('mysql:host=loca...', Array, Array)
+#2 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connectors/ConnectionFactory.php(61): Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#3 [internal function]: Illuminate\Database\Connectors\ConnectionFactory->Illuminate\Database\Connectors\{closure}()
+#4 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connection.php(908): call_user_func(Object(Closure))
+#5 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connection.php(776): Illuminate\Database\Connection->getPdo()
+#6 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connection.php(661): Illuminate\Database\Connection->reconnectIfMissingConnection()
+#7 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connection.php(342): Illuminate\Database\Connection->run('select * from i...', Array, Object(Closure))
+#8 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Schema/MySqlBuilder.php(21): Illuminate\Database\Connection->select('select * from i...', Array)
+#9 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Migrations/DatabaseMigrationRepository.php(141): Illuminate\Database\Schema\MySqlBuilder->hasTable('migrations')
+#10 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(404): Illuminate\Database\Migrations\DatabaseMigrationRepository->repositoryExists()
+#11 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(103): Illuminate\Database\Migrations\Migrator->repositoryExists()
+#12 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(58): Illuminate\Database\Console\Migrations\MigrateCommand->prepareDatabase()
+#13 [internal function]: Illuminate\Database\Console\Migrations\MigrateCommand->fire()
+#14 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Container/Container.php(507): call_user_func_array(Array, Array)
+#15 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Console/Command.php(169): Illuminate\Container\Container->call(Array)
+#16 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/symfony/console/Command/Command.php(256): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#17 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Console/Command.php(155): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#18 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/symfony/console/Application.php(791): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#19 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/symfony/console/Application.php(186): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Database\Console\Migrations\MigrateCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#20 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/symfony/console/Application.php(117): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#21 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(107): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#22 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#23 {main}  
+[2016-06-01 15:48:12] production.ERROR: PDOException: SQLSTATE[HY000] [1045] Access denied for user 'forge'@'localhost' (using password: NO) in /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:55
+Stack trace:
+#0 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(55): PDO->__construct('mysql:host=loca...', 'forge', '', Array)
+#1 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connectors/MySqlConnector.php(24): Illuminate\Database\Connectors\Connector->createConnection('mysql:host=loca...', Array, Array)
+#2 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connectors/ConnectionFactory.php(61): Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#3 [internal function]: Illuminate\Database\Connectors\ConnectionFactory->Illuminate\Database\Connectors\{closure}()
+#4 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connection.php(908): call_user_func(Object(Closure))
+#5 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connection.php(776): Illuminate\Database\Connection->getPdo()
+#6 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connection.php(661): Illuminate\Database\Connection->reconnectIfMissingConnection()
+#7 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Connection.php(342): Illuminate\Database\Connection->run('select * from i...', Array, Object(Closure))
+#8 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Schema/MySqlBuilder.php(21): Illuminate\Database\Connection->select('select * from i...', Array)
+#9 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Migrations/DatabaseMigrationRepository.php(141): Illuminate\Database\Schema\MySqlBuilder->hasTable('migrations')
+#10 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(404): Illuminate\Database\Migrations\DatabaseMigrationRepository->repositoryExists()
+#11 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(103): Illuminate\Database\Migrations\Migrator->repositoryExists()
+#12 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(58): Illuminate\Database\Console\Migrations\MigrateCommand->prepareDatabase()
+#13 [internal function]: Illuminate\Database\Console\Migrations\MigrateCommand->fire()
+#14 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Container/Container.php(507): call_user_func_array(Array, Array)
+#15 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Console/Command.php(169): Illuminate\Container\Container->call(Array)
+#16 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/symfony/console/Command/Command.php(256): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#17 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Console/Command.php(155): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#18 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/symfony/console/Application.php(791): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#19 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/symfony/console/Application.php(186): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Database\Console\Migrations\MigrateCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#20 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/symfony/console/Application.php(117): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#21 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(107): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#22 /home/vagrant/Dropbox/Ainet/Market_Farmer_Ainet/farmerMarket/artisan(35): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#23 {main}  
+>>>>>>> e8f28d44d6fca69bcb17bf4b52720a18b5279de1
