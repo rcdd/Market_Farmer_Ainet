@@ -60,6 +60,7 @@
                         <li><a data-toggle="modal" data-target="#myModal" href="#">Login</a></li>
                         <li><a href="<?php echo e(url('/register')); ?>">Register</a></li>
                     <?php else: ?>
+                        <?php /* url('/images/profile/'. Auth::user()->id ) */ ?> 
                         <li><img src="<?php echo e(url('/assets/uploads/users/'. Auth::user()->profile_photo )); ?>" alt="Profile Picture" width="50px" height="50px"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

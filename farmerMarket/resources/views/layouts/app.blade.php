@@ -60,6 +60,7 @@
                         <li><a data-toggle="modal" data-target="#myModal" href="#">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
+                        {{-- url('/images/profile/'. Auth::user()->id ) --}} 
                         <li><img src="{{ url('/assets/uploads/users/'. Auth::user()->profile_photo ) }}" alt="Profile Picture" width="50px" height="50px"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
