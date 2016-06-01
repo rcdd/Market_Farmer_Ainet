@@ -3,31 +3,38 @@
 <?php $__env->startSection('content'); ?>
 <div class="container">
         <div class="row">
-            <div class="col-md-6">
                 <a href="/advertisement/new"><button class="btn btn-success">New advertisement</button></a>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-striped">
-                    <thead>
-                    <td>Owner</td>
-                    <td>Name</td>
-                    <td>Price</td>
-                    <td></td>
-                    </thead>
-                    <tbody>
-                    <?php foreach($advertisements as $advertisement): ?>
-                        <tr>
-                            <td><?php echo e($advertisement->owner_id); ?></td>
-                            <td><?php echo e($advertisement->name); ?></td>
-                            <td><?php echo e($advertisement->price_cents); ?>€</td>
-                            <td><a href="/advertisement/destroy/<?php echo e($advertisement->id); ?>"><button class="btn btn-danger">Del</button></a> </td>
-                        </tr>
-                   <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+        <br/>
+        <div class="row col-md-12">
+                <?php foreach($advertisements as $advertisement): ?>
+                    <div class="row col-md-4">
+                        <div class="col-sm-6">
+                            <img src="/assets/images/market2.jpg" alt="..." width="140" height="140" class="img-rounded">
+                        </div>
+
+                        <div class="col-sm-6">
+
+                            <label class="control-label" for="owner">Owner:</label><?php echo e($advertisement->owner_id); ?>
+
+
+                            <br/>
+
+                            <label class="control-label" for="name">Name:</label>
+                            <?php echo e($advertisement->name); ?>
+
+
+                            <br/>
+
+                            <label class="control-label" for="price">Price:</label><?php echo e($advertisement->price_cents); ?>€
+
+                            <br/>
+
+                            <a href="/advertisement/destroy/<?php echo e($advertisement->id); ?>"><button class="btn btn-danger">Del</button></a> 
+                            <a href="/advertisement/edit/<?php echo e($advertisement->id); ?>"><button class="btn btn-warning">Edit</button></a> 
+                        </div>
+                    </div>
+               <?php endforeach; ?>
         </div>
     </div>
 <?php $__env->stopSection(); ?>

@@ -35,3 +35,6 @@ Route::post('/register', 'UserController@store');
 Route::get('/advertisement/view', ['middleware'=>'auth','uses' => 'AdvertisementController@index']);
 Route::get('/advertisement/new', ['middleware'=>'auth','uses' => 'AdvertisementController@newProduct']);
 Route::post('/advertisement/save', ['middleware'=>'auth','uses' => 'AdvertisementController@add']);
+
+// 
+Route::get('/images/profile/{id}', 'MediaController@getImageProfile');

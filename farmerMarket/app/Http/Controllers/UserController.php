@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 
+//files
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 class UserController extends Controller
 {
     public function list(){
@@ -36,8 +40,18 @@ class UserController extends Controller
 		
         // gravar na DB
         $input = $request->all();
-        $profile_photo = $request->file('profile_photo')->getClientOriginalName();
-        $request->file('profile_photo')->move(base_path() . '/public/assets/uploads/users/', $profile_photo);
+
+        //image field
+        $file = $request->file('profile_photo');
+        $extension = $file->getClientOriginalExtension();
+        Storage::disk('local')->put("profile/" . $file->getFilename().'.'.$extension,  File::get($file));
+
+        $mime_type = $file->getClientMimeType();
+        $profile_photo = $file->getFilename().'.'.$extension;
+        //end image field
+
+        // $profile_photo = $request->file('profile_photo')->getClientOriginalName();
+        // $request->file('profile_photo')->move(base_path() . '/public/assets/uploads/users/', $profile_photo);
 
         User::create([
         	'name'  => $input['name'],
@@ -47,11 +61,12 @@ class UserController extends Controller
         	'location' => $input['location'],
         	'presentation' => $input['presentation'],
         	'profile_photo' => $profile_photo,
+            'mime_type' => $mime_type,
         	'profile_url' => $input['profile_url'],
         ]);
 
-        // redirect para a vista seguinte
-        return view('home');
+        // redirect para a home
+        return redirect('/home');
     }
 
     public function edit($id){
@@ -80,9 +95,15 @@ class UserController extends Controller
 
 	    $user->password = password_hash ( $input['password'], PASSWORD_DEFAULT);
 	    $user->admin = $request->has('admin');
-	    $user->profile_photo = $user->id . '_' . $request->file('profile_photo')->getClientOriginalName();
 
-        $request->file('profile_photo')->move(base_path() . '/public/assets/uploads/users/', $user->profile_photo);
+        //image field
+        $file = $request->file('profile_photo');
+        $extension = $file->getClientOriginalExtension();
+        Storage::disk('local')->put("profile/" . $file->getFilename().'.'.$extension,  File::get($file));
+
+        $user->mime_type = $file->getClientMimeType();
+        $user->profile_photo = $file->getFilename().'.'.$extension;
+        //end image field
 
 	   	$user->save();
 

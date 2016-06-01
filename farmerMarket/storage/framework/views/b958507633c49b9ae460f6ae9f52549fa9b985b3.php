@@ -2,7 +2,7 @@
 <?php $__env->startSection('title', 'Home'); ?>
 <?php $__env->startSection('content'); ?>
 
-<div class="panel panel-info">
+<div class="container">
         <div class="panel-heading">
             <div class="panel-title">New Product</div>
         </div>
@@ -26,13 +26,54 @@
                             <textarea class="form-control" id="textarea" name="description"></textarea>
                         </div>
                     </div>
+
+                    
+
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="price_cents">Price</label>
+                        <label class="col-md-3 control-label" for="trade_prefs">Trade Preferences</label>
                         <div class="col-md-9">
-                            <input id="price_cents" name="price_cents" type="text" placeholder="Product price" class="form-control input-md" required="">
- 
+                            <input id="trade_prefs" name="trade_prefs" type="text" placeholder="Trade Preferences" class="form-control input-md" required="">
                         </div>
                     </div>
+
+                     <div class="form-group">
+                        <label class="col-md-3 control-label" for="photo_path">Image</label>
+                        <div class="col-md-9">
+                            <input id="photo_path" name="photo_path" type="file" " class="" required="">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                       <div class="row col-md-offset-3">
+                            <label class="col-md-2 control-label" for="price_cents">Price in Cents</label>
+                            <div class="col-md-3">
+                                <input id="price_cents" name="price_cents" type="number" placeholder="Product price (cents)" class="form-control input-md" required="">
+                            </div>
+                            
+                            <label class="col-md-2 control-label" for="quantity">Quantity</label>
+                            <div class="col-md-3">
+                                <input id="quantity" name="quantity" type="number" placeholder="Quantity" class="form-control input-md" required="">
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                     <div class="form-group">
+                       <div class="row col-md-offset-3">
+                                <label class="col-md-2 control-label" for="available_on">Available On</label>
+                            <div class="col-md-3"> 
+                                <input id="available_on" name="available_on" type="date" class="form-control col-md-12" required="">  
+                            </div>
+                            
+                                <label class="col-md-2 control-label" for="available_on">Available Until</label>
+                            <div class="col-md-3"> 
+                                <input id="available_until" name="available_until" type="date" class="form-control col-md-15" required="">
+                            </div>
+                        </div>
+                      </div>
+
                     <!-- <div class="form-group">
                         <label class="col-md-3 control-label" for="imageurl">Image URL</label>
                         <div class="col-md-9">

@@ -8,6 +8,8 @@ use Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Response;
+
+use App\User;
  
 class MediaController extends Controller {
  
@@ -37,12 +39,12 @@ class MediaController extends Controller {
 		
 	}
 
-	public function get($filename){
-	
-		$entry = Fileentry::where('filename', '=', $filename)->firstOrFail();
-		$file = Storage::disk('local')->get($entry->filename);
- 
-		return (new Response($file, 200))
-              ->header('Content-Type', $entry->mime);
+	public function getImageProfile($id){
+		$user = User::findOrFail($id);
+		//$entry = $user->where('id', '=', $id)->firstOrFail();
+		$file = Storage::disk('local')->get("profile/". $user->profile_photo);
+
+		return (new Response($file, 200))->header('Content-Type', $user->mime_type);
+
 	}
 }

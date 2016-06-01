@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,7 +43,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
-                    Laravel
+                    Market Farms
                 </a>
             </div>
 
@@ -60,7 +61,8 @@
                         <li><a data-toggle="modal" data-target="#myModal" href="#">Login</a></li>
                         <li><a href="<?php echo e(url('/register')); ?>">Register</a></li>
                     <?php else: ?>
-                        <li><img src="<?php echo e(url('/assets/uploads/users/'. Auth::user()->profile_photo )); ?>" alt="Profile Picture" width="50px" height="50px"></li>
+                        <?php /* url('/images/profile/'. Auth::user()->id ) */ ?> 
+                        <li><img src="<?php echo e(url('/images/profile/'. Auth::user()->id )); ?>" alt="Profile Picture" width="50px" height="50px"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
