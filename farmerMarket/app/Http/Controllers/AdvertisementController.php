@@ -1,9 +1,7 @@
 <?php
  
 namespace App\Http\Controllers;
- 
-use App\Advertisement;
- 
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Request;
@@ -12,13 +10,16 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
  
 use App\Media;
+use App\Advertisement;
+use App\Comments;
+use App\User;
 
 class AdvertisementController extends Controller
 {
  
     public function index(){
         $advertisements = Advertisement::all();
-        return view('advertisements.view',['advertisements' => $advertisements]);
+        return view('advertisements.index',['advertisements' => $advertisements]);
     }
  
     public function destroy($id){
@@ -26,7 +27,7 @@ class AdvertisementController extends Controller
         return redirect('/advertisement/view');
     }
  
-    public function newProduct(){
+    public function newAdvertisement(){
         return view('advertisements.new');
     }
  
@@ -60,7 +61,15 @@ class AdvertisementController extends Controller
 
         $media->save();
  
-        return redirect('/advertisement/view');
+        return redirect('/advertisement/index');
  
+    }
+
+    public function viewAdvertisement($id){
+        $ads = Advertisement::findOrFail($id);
+        $users = User::all();
+        $comments = Comments::where('advertisement_id', '=', $id)->get();
+
+        return view('advertisements.view', compact('ads', 'users', 'comments'));
     }
 }

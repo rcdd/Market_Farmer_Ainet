@@ -52,7 +52,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
-                    <li><a href="{{ url('/advertisement/view') }}">Products</a></li>
+                    <li><a href="{{ url('/advertisement/index') }}">Advertisements</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -62,7 +62,6 @@
                         <li><a data-toggle="modal" data-target="#myModal" href="#">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
-                        {{-- url('/images/profile/'. Auth::user()->id ) --}} 
                         <li><img src="{{ url('/images/profile/'. Auth::user()->id ) }}" alt="Profile Picture" width="50px" height="50px"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

@@ -30,12 +30,15 @@ Route::get('/register', 'UserController@register');
 Route::post('/register', 'UserController@store');
 
 
-///// products
-
-Route::get('/advertisement/view', ['middleware'=>'auth','uses' => 'AdvertisementController@index']);
-Route::get('/advertisement/new', ['middleware'=>'auth','uses' => 'AdvertisementController@newProduct']);
+// products
+Route::get('/advertisement/index', ['middleware'=>'auth','uses' => 'AdvertisementController@index']);
+Route::get('/advertisement/view/{id}', ['middleware'=>'auth','uses' => 'AdvertisementController@viewAdvertisement']);
+Route::get('/advertisement/new', ['middleware'=>'auth','uses' => 'AdvertisementController@newAdvertisement']);
 Route::post('/advertisement/save', ['middleware'=>'auth','uses' => 'AdvertisementController@add']);
 
 // images router
 Route::get('/images/profile/{id}', 'MediaController@getImageProfile');
 Route::get('/images/ads/{id}', 'MediaController@getImageAds');
+
+//comments
+Route::post('/comment/new', ['middleware'=>'auth', 'uses' => 'CommentsController@insert']);

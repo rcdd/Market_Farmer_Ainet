@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <?php /* <link href="<?php echo e(elixir('css/app.css')); ?>" rel="stylesheet"> */ ?>
 
-    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link media="all" type="text/css" rel="stylesheet"
+                href="assets/css/style.min.css">
 
     <style>
         body {
@@ -28,7 +29,7 @@
         }
     </style>
 </head>
-<body id="app-layout">
+<body id="app-layout" >
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -51,7 +52,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="<?php echo e(url('/home')); ?>">Home</a></li>
-                    <li><a href="<?php echo e(url('/advertisement/view')); ?>">Products</a></li>
+                    <li><a href="<?php echo e(url('/advertisement/index')); ?>">Advertisements</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -61,7 +62,6 @@
                         <li><a data-toggle="modal" data-target="#myModal" href="#">Login</a></li>
                         <li><a href="<?php echo e(url('/register')); ?>">Register</a></li>
                     <?php else: ?>
-                        <?php /* url('/images/profile/'. Auth::user()->id ) */ ?> 
                         <li><img src="<?php echo e(url('/images/profile/'. Auth::user()->id )); ?>" alt="Profile Picture" width="50px" height="50px"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
