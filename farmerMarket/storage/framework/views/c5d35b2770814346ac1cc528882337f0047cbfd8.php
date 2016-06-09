@@ -26,7 +26,7 @@
                    
 
                     <a href="/advertisement/bid/<?php echo e($ads->id); ?>"><button class="btn btn-primary">Bid</button></a>
-                    <?php if(Auth::user()->id == $ads->user->id): ?>
+                    <?php if(Auth::user()->id == $ads->user->id || Auth::user()->admin): ?>
                     <a href="/advertisement/edit/<?php echo e($ads->id); ?>"><button class="btn btn-warning">Edit</button></a> 
                     <a href="/advertisement/destroy/<?php echo e($ads->id); ?>" onclick="return confirm('Are you sure?')"><button class="btn btn-danger">Del</button></a> 
                     <?php endif; ?>
@@ -57,7 +57,12 @@
 
 
 </div>
-
+<script type="text/javascript">
+    $("button.replay").click(function(){
+        $id = $(this).data('id');
+        $("#parent_id").val($id);
+    });
+</script>
 
 <?php $__env->stopSection(); ?>
 
@@ -67,7 +72,7 @@
 
         <!-- Modal content-->
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header">   
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">New Comment</h4>
           </div>
@@ -98,16 +103,4 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-$('#replayComment').on('show', function(e) {
-    alert("sdfsdf");
-    //get data-id attribute of the clicked element
-    var parent_id = $(e.relatedTarget).data('id');
-
-    //populate the textbox
-    $(e.currentTarget).find('input[name="parent_id"]').val(parent_id);
-});
-</script>
-
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

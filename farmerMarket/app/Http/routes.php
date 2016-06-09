@@ -12,8 +12,8 @@
 */
 
  // users
-Route::get('users', ['middleware'=>'auth','uses' => 'UserController@list']);
-Route::get('users/edit/{id}', ['middleware'=>'auth','uses' => 'UserController@edit']);
+Route::get('users', ['middleware'=>'is.admin','uses' => 'UserController@list']);
+Route::get('users/edit/{id}', ['middleware'=>'is.own','middleware'=>'is.admin','uses' => 'UserController@edit']);
 Route::post('users/update/{id}', ['middleware'=>'auth','uses' => 'UserController@update']);
 Route::get('/register', 'UserController@register');
 Route::post('/register', 'UserController@store');
@@ -22,7 +22,7 @@ Route::get('/ownAds/{id}', 'UserController@viewOwnAdvertisements');
 
 
 // products
-Route::get('/advertisement/index', ['middleware'=>'auth','uses' => 'AdvertisementController@index']);
+Route::get('/advertisement/index', ['uses' => 'AdvertisementController@index']);
 Route::get('/advertisement/view/{id}', ['middleware'=>'auth','uses' => 'AdvertisementController@viewAdvertisement']);
 Route::get('/advertisement/new', ['middleware'=>'auth','uses' => 'AdvertisementController@newAdvertisement']);
 Route::post('/advertisement/save', ['middleware'=>'auth','uses' => 'AdvertisementController@add']);

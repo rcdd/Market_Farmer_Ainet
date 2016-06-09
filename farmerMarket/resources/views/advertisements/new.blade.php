@@ -3,10 +3,7 @@
 @section('content')
 
 <div class="container">
-        <div class="panel-heading">
-            <div class="panel-title">New Product</div>
-        </div>
-        <div class="panel-body" >
+        <div class="panel-body row col-md-10" >
             <form method="POST" action="/advertisement/save" class="form-horizontal" enctype="multipart/form-data" role="form">
                 {!! csrf_field() !!}
                 <fieldset>
@@ -47,7 +44,7 @@
                        <div class="row col-md-offset-3">
                             <label class="col-md-2 control-label" for="price_cents">Price</label>
                             <div class="col-md-3">
-                                <input id="price_cents" name="price_cents" type="number" placeholder="Product price (cents)" class="form-control input-md" >
+                                <input id="price_cents" name="price_cents" type="number" placeholder="Price" class="form-control input-md" >
                             </div>
                             
                             <label class="col-md-2 control-label" for="quantity">Quantity</label>
@@ -60,8 +57,8 @@
 
 
                      <div class="form-group">
-                       <div class="row col-md-offset-3">
-                                <label class="col-md-2 control-label" for="available_on">Available On</label>
+                       <div class="row col-md-offset-2">
+                                <label class="col-md-3 control-label" for="available_on">Available On</label>
                             <div class="col-md-3"> 
                                 <input id="available_on" name="available_on" type="date" class="form-control col-md-12" >  
                             </div>

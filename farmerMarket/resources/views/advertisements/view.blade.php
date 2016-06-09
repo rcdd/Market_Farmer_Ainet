@@ -28,7 +28,7 @@
                    
 
                     <a href="/advertisement/bid/{{$ads->id}}"><button class="btn btn-primary">Bid</button></a>
-                    @if(Auth::user()->id == $ads->user->id)
+                    @if(Auth::user()->id == $ads->user->id || Auth::user()->admin)
                     <a href="/advertisement/edit/{{$ads->id}}"><button class="btn btn-warning">Edit</button></a> 
                     <a href="/advertisement/destroy/{{$ads->id}}" onclick="return confirm('Are you sure?')"><button class="btn btn-danger">Del</button></a> 
                     @endif
@@ -59,7 +59,12 @@
 
 
 </div>
-
+<script type="text/javascript">
+    $("button.replay").click(function(){
+        $id = $(this).data('id');
+        $("#parent_id").val($id);
+    });
+</script>
 
 @endsection
 
@@ -69,7 +74,7 @@
 
         <!-- Modal content-->
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header">   
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">New Comment</h4>
           </div>
@@ -100,14 +105,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-$('#replayComment').on('show', function(e) {
-    alert("sdfsdf");
-    //get data-id attribute of the clicked element
-    var parent_id = $(e.relatedTarget).data('id');
-
-    //populate the textbox
-    $(e.currentTarget).find('input[name="parent_id"]').val(parent_id);
-});
-</script>

@@ -20,13 +20,18 @@
 	            <button data-toggle="modal" data-target="#replayComment" data-id="{{$comment->id}}" class="replay btn btn-warning">
 	                    <i class="fa fa-mail-reply"></i> Replay
 	            </button>
+	            @if(Auth::user()->id == $comment->user->id || Auth::user()->admin)
+	            <a href="{{url('/comment/delete/' . $comment->id) }}"><button class="replay btn btn-danger">
+	                    <i class="fa fa-close"></i> Delete
+	            </button></a>
+	            @endif
 	        </div>
 	      </div>
 	      <hr width=80% align=left>
 	    </div>
 	    @if(count($comment->hasReplay) > 0)
 	        @foreach($comment->hasReplay as $com)
-				<div class="row col-md-12">
+				<div class="row col-md-offset-1">
 			    	<div class="row ">
 				        <div class="col-md-2">
 				            <label class="control-label" for="user">User: </label>
@@ -42,14 +47,17 @@
 				            <label class="control-label" for="user">Mensage: </label>
 				            {{$com->comment}}
 				        </div>
+				        @if(Auth::user()->id == $comment->user->id || Auth::user()->admin)
 				        <div class="col-md-2">
-				            <button data-toggle="modal" data-target="#replayComment" class="btn btn-warning">
-				                    <i class="fa fa-mail-reply"></i> Replay
-				            </button>
+							<a href="{{url('/comment/delete/' . $comment->id) }}"><button class="replay btn btn-danger">
+	                    	<i class="fa fa-close"></i> Delete
+	            			</button></a>
 				        </div>
-				     </div>
-				     <br />
-			      <hr width=80% align=left>
+				        @endif
+				    </div>
+				     
+				    <br />
+			      	<hr width=80% align=left>
 			    </div>
 	        @endforeach
 	    @endif
