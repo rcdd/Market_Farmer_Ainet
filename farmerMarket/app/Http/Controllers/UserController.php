@@ -22,7 +22,8 @@ class UserController extends Controller
 
     public function register(){
     	$user = new User;
-    	return view('auth.register', compact('user'));
+        $title = "New User";
+    	return view('auth.register', compact('user', 'title'));
     }
 
 	public function store(Request $request){
@@ -71,8 +72,9 @@ class UserController extends Controller
 
     public function edit($id){
     	$user = User::findOrFail($id);
+        $title = "Edit User";
     	//return view('users.edit', ['id' => $id]);
-    	return view('auth.edit', compact('id', 'user'));
+    	return view('auth.edit', compact('id', 'user', 'title'));
     }
 
     public function update($id, Request $request)
@@ -112,6 +114,18 @@ class UserController extends Controller
 
     public function delete($id){
     	return "Delete Users $id";
+    }
+
+    public function viewOwnAdvertisements($id){
+        $title = "My Advertisements ";
+        $user = User::findOrFail($id);
+        if(count($user->advertisements) > 0){
+            $advertisements = $user->advertisements()->get();
+        }else{
+            $advertisements = "";
+        }
+
+        return view('advertisements.index', compact('advertisements', 'title'));
     }
 
 }

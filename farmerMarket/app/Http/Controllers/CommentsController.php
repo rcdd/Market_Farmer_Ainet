@@ -24,13 +24,11 @@ class CommentsController extends Controller
 		$com  = new Comments();
         $com->comment = $input['comment'];
         $com->advertisement_id = $input['advertisement_id'];
-        $com->parent_id = "1";
         $com->user_id = $input['user_id'];
+        $com->parent_id = (isset($input['parent_id']) ? $input['parent_id'] : null);
 
         $com->save();
 
-        // redirect para a home
-        return redirect('home');
-
+        return redirect()->back();
     }
 }

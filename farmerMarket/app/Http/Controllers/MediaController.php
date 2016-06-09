@@ -50,15 +50,27 @@ class MediaController extends Controller {
 
 	public function getImageAds($id){
 		$ads = Advertisement::findOrFail($id);
-		$photo = Media::where('advertisement_id', '=', $ads->id)->firstOrFail();
+		$file = null;
 
-		if(!$file = Storage::disk('local')->exists("ads/". $photo->photo_path)){
-			$file = Storage::disk('local')->get("/image_not_found.png");
-			return (new Response($file, 200))->header('Content-Type', $photo->mime_type);
+		if(count($ads->medias) > 0){
+			$photo = $ads->medias[0];
+			$file = (Storage::disk('local')->exists("ads/". $photo->photo_path) ? storage_path("app/ads/". $photo->photo_path) : storage_path("app/image_not_found.png") );
 		}
 
-		$file = Storage::disk('local')->get("ads/". $photo->photo_path);
-		return (new Response($file, 200))->header('Content-Type', $photo->mime_type);
+		if($file == null)
+			$file = storage_path("app/image_not_found.png");
 
+ 		$headers = array(
+              'Content-Type:' . (isset($photo->mime_type) ? $photo->mime_type : "image/png"),
+            );
+
+		return response()->download($file, 'TESTE', $headers, 'inline');
+
+	}
+
+	public function deleteImageAds($id){
+		$photo = Media::findOrFail($id);
+		$photo->destroy;
+		return;
 	}
 }

@@ -2,23 +2,36 @@
 
 @section('content')
 <div class="container">
+
+
         <div class="row col-md-12">
             <div class="row col-md-8">
                 <div class="col-sm-6">
-                    <img src="{{ url('images/ads/' .$ads->id) }}" alt="Image Product" width="140" height="140" class="img-rounded"> </img> 
+                    <img src="{{ url('images/ads/' .$ads->id) }}" alt="Image Product" width="300" height="200" class="img"> </img> 
                 </div>
                 <div class="col-sm-6">
-                    <p><label class="control-label" for="owner">Owner: </label> {{$ads->owner_id}} </p>
+                    <p><label class="control-label" for="owner">Owner: </label> {{ $ads->user->name }} </p>
 
                     <p><label class="control-label" for="name">Name: </label> {{$ads->name}}</p>
+
+                    <p><label class="control-label" for="name">Description: </label> {{$ads->description}}</p>
+
+                    <p><label class="control-label" for="name">Quantity: </label> {{$ads->quantity}}</p>
+
+                    <p><label class="control-label" for="name">Trade Prefs: </label> {{$ads->trade_prefs}}</p>
 
                     <p><label class="control-label" for="price">Open Price: </label> {{$ads->price_cents}}€ </p>
 
                     <p><label class="control-label" for="price">Minimal Price: </label> {{$ads->price_cents}}€ </p>
+
+                    <p><label class="control-label" for="name">Available Until: </label> {{$ads->available_until}}</p>
                    
-                    <a href="/advertisement/bid/{{$ads->id}}"><button class="btn btn-primary">Bid</button></a> 
+
+                    <a href="/advertisement/bid/{{$ads->id}}"><button class="btn btn-primary">Bid</button></a>
+                    @if(Auth::user()->id == $ads->user->id)
                     <a href="/advertisement/edit/{{$ads->id}}"><button class="btn btn-warning">Edit</button></a> 
-                    <a href="/advertisement/destroy/{{$ads->id}}"><button class="btn btn-danger">Del</button></a> 
+                    <a href="/advertisement/destroy/{{$ads->id}}" onclick="return confirm('Are you sure?')"><button class="btn btn-danger">Del</button></a> 
+                    @endif
 
                 </div>
             </div>
@@ -39,41 +52,17 @@
                         <i class="fa fa-commenting"></i> New comment
                 </button>
             </div>
+            <div class="row col-md-12">
+                @include('comments.comments_view')
+            </div>
         </div>
 
-            <div class="row col-md-12">
-                    @if (count($comments) > 0)
-                        @foreach($comments as $comment)
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label class="control-label" for="user">User: </label>
-                                {{$comment->author}}
-                            </div>
-                            <div class="col-md-4">
-                                <label class="control-label" for="date">Date: </label>
-                                {{$comment->created_at}}
-                            </div>
-                        </div>
-                         <div class="row">
-                            <div class="col-md-6">
-                                <label class="control-label" for="user">Mensage: </label>
-                                {{$comment->comment}}
-                            </div>
-                            <div class="col-md-2">
-                                <button data-toggle="modal" data-target="#replayComment" class="btn btn-warning">
-                                        <i class="fa fa-mail-reply"></i> Replay
-                                </button>
-                            </div>
-                                <br /><hr>
-                        </div>
-                        @endforeach
-                    @else
-                        No comments.. Be the First :)
-                    @endif
 
-                
-            </div>
 </div>
+
+
+@endsection
+
 
 <div id="newComment" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -103,11 +92,22 @@
             <h4 class="modal-title">Replay Comment</h4>
           </div>
             <div class="modal-body">
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/comment/reply') }}">
+            <form class="form-horizontal" role="form" method="POST" action="{{ url('/comment/new') }}">
+            <input type="hidden" class="form-control" id="parent_id" name="parent_id" value="" />
                 @include('comments.comment_form')
 
             </div>
         </div>
     </div>
 </div>
-@endsection
+
+<script type="text/javascript">
+$('#replayComment').on('show', function(e) {
+    alert("sdfsdf");
+    //get data-id attribute of the clicked element
+    var parent_id = $(e.relatedTarget).data('id');
+
+    //populate the textbox
+    $(e.currentTarget).find('input[name="parent_id"]').val(parent_id);
+});
+</script>

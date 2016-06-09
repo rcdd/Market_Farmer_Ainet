@@ -10,7 +10,7 @@ class Comments extends Model
         'comment', 'advertisement_id', 'parent_id', 'user_id',
     ];
 
-    public function author() {
+/*    public function author() {
         return $this->belongsTo('App\User')->select('name');
     }
 
@@ -41,7 +41,27 @@ class Comments extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\Comments')->where('parent_id', 1);
+        return $this->hasMany('App\Comments')->where('parent_id', null);
+    }
+
+    */
+
+    public function advertisement() {
+        return $this->belongsTo('App\Advertisement');
+    }
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Comments', 'parent_id');
+    }
+
+    public function hasReplay()
+    {
+        return $this->hasMany('App\Comments', 'parent_id');
     }
 
 }

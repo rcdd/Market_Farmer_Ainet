@@ -45,7 +45,7 @@
 
                     <div class="form-group">
                        <div class="row col-md-offset-3">
-                            <label class="col-md-2 control-label" for="price_cents">Price in Cents</label>
+                            <label class="col-md-2 control-label" for="price_cents">Price</label>
                             <div class="col-md-3">
                                 <input id="price_cents" name="price_cents" type="number" placeholder="Product price (cents)" class="form-control input-md" >
                             </div>
@@ -73,19 +73,6 @@
                         </div>
                       </div>
 
-                    <!-- <div class="form-group">
-                        <label class="col-md-3 control-label" for="imageurl">Image URL</label>
-                        <div class="col-md-9">
-                            <input id="imageurl" name="imageurl" type="text" placeholder="Image URL" class="form-control input-md" >
- 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="file">File</label>
-                        <div class="col-md-9">
-                            <input id="file" name="file" class="input-file" type="file">
-                        </div>
-                    </div> -->
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="submit"></label>
                         <div class="col-md-9">

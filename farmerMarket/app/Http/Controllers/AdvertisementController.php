@@ -19,16 +19,27 @@ class AdvertisementController extends Controller
  
     public function index(){
         $advertisements = Advertisement::all();
-        return view('advertisements.index',['advertisements' => $advertisements]);
+        return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
     }
  
     public function destroy($id){
-        Advertisement::destroy($id);
-        return redirect('/advertisement/view');
+
+        $ads =Advertisement::findOrFail($id);
+        if($ads->medias){
+
+            $ads->medias()->delete();
+        }
+
+        if($ads->comments){
+            $ads->comments()->delete();
+        }
+
+        $ads->delete();
+        return redirect('/advertisement/index');
     }
  
     public function newAdvertisement(){
-        return view('advertisements.new');
+        return view('advertisements.new', ['title' => "New Advertisement"]);
     }
  
     public function add() {
@@ -46,20 +57,22 @@ class AdvertisementController extends Controller
         $advertisement->save();
 
         //image field
-        $file = Request::file('photo_path');
-        $extension = $file->getClientOriginalExtension();
-        Storage::disk('local')->put("ads/" . $file->getFilename().'.'.$extension,  File::get($file));
- 
+        if($file = Request::file('photo_path')){
+            $extension = $file->getClientOriginalExtension();
+            Storage::disk('local')->put("ads/" . $file->getFilename().'.'.$extension,  File::get($file));
+     
 
-        $media = new Media();
-        $media->mime_type = $file->getClientMimeType();
-        $media->photo_path = $file->getFilename().'.'.$extension;
+            $media = new Media();
+            $media->mime_type = $file->getClientMimeType();
+            $media->photo_path = $file->getFilename().'.'.$extension;
 
-        //$advertisement->integer('id')->unsigned();
-        $media->advertisement_id = $advertisement->id;
-        //end image field
+            //$advertisement->integer('id')->unsigned();
+            $media->advertisement()->associate($advertisement);
+            //end image field
 
-        $media->save();
+            $media->save();
+        }
+
  
         return redirect('/advertisement/index');
  
@@ -67,9 +80,8 @@ class AdvertisementController extends Controller
 
     public function viewAdvertisement($id){
         $ads = Advertisement::findOrFail($id);
-        $users = User::all();
-        $comments = Comments::where('advertisement_id', '=', $id)->get();
-
-        return view('advertisements.view', compact('ads', 'users', 'comments'));
+        $title = "Advertisement :: " . $ads->name;
+        $comments = $ads->comments()->where('parent_id', null)->get();
+        return view('advertisements.view', compact('ads', 'comments', 'title'));
     }
 }
