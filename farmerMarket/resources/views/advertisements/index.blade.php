@@ -3,11 +3,72 @@
 @section('content')
 
 <div class="container">
-        <div class="row">
-                <a href="/advertisement/new"><button class="btn btn-success">New advertisement</button></a>
-        </div>
-        <br/>
         <div class="row col-md-12">
+            <div class="col-md-2">
+                <a href="/advertisement/new"><button class="btn btn-success">New advertisement</button></a>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control">
+                    <option value="0" selected>Filter By</option>
+                    <option value="1">Product Name</option>
+                    <option value="1">Price</option>
+                    <option value="2">Date Offering</option>
+                    <option value="3">Seller's Name</option>
+                    <option value="4">Seller's Score</option>
+                </select>
+
+            </div>
+            <div class="col-md-5">
+                <div class="input-group" id="adv-search">
+                    <input type="text" class="form-control" placeholder="Search by" />
+                    <div class="input-group-btn">
+                        <div class="btn-group" role="group">
+                            <div class="dropdown dropdown-lg">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <form class="form-horizontal" role="form">
+                                      <div class="form-group">
+                                        <label for="contain">Seller Name</label>
+                                        <input class="form-control" type="text" />
+                                      </div>
+                                      <label for="filter">Scores</label> 
+                                      <div class="form-group checkbox">
+                                        <label>
+                                            <input type="checkbox" name="score_group[]" value="1" /> 1 | 
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="score_group[]" value="2" /> 2 | 
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="score_group[]" value="3" /> 3 | 
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="score_group[]" value="4" /> 4 | 
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="score_group[]" value="5" /> 5 
+                                        </label>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="contain">Location</label>
+                                        <input class="form-control" type="text" />
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="contain">Tags</label>
+                                        <input class="form-control" type="text" />
+                                      </div>
+                                      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row col-md-12">
+            <br/>
             @if($advertisements != "")
                 @foreach ($advertisements as $advertisement)
                     <a href="/advertisement/view/{{$advertisement->id}}">

@@ -34,6 +34,10 @@ Route::get('/advertisement/new', ['middleware'=>'auth','uses' => 'AdvertisementC
 Route::post('/advertisement/save', ['middleware'=>'auth','uses' => 'AdvertisementController@add']);
 Route::get('/advertisement/destroy/{id}', ['middleware'=>'auth','uses' => 'AdvertisementController@destroy']);
 
+//bids
+Route::post('/advertisement/view/{id}/bid', ['middleware'=>'auth', 'uses' => 'BidsController@placeBid']);
+
+
 // images 
 Route::get('/images/profile/{id}', 'MediaController@getImageProfile');
 Route::get('/images/ads/{id}', 'MediaController@getImageAds');
@@ -41,6 +45,9 @@ Route::get('/images/ads/{id}', 'MediaController@getImageAds');
 //comments
 Route::post('/comment/new', ['middleware'=>'auth', 'uses' => 'CommentsController@insert']);
 Route::get('/comment/delete/{id}', ['middleware'=>'is.own', 'uses' => 'CommentsController@delete']);
+
+//bids
+Route::post('/advertisement/view/{id}/bid', ['middleware'=>'auth', 'uses' => 'BidsController@placeBid']);
 
 //miscelaneous
 Route::auth();

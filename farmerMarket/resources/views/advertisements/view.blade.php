@@ -22,12 +22,12 @@
 
                     <p><label class="control-label" for="price">Open Price: </label> {{$ads->price_cents}}€ </p>
 
-                    <p><label class="control-label" for="price">Minimal Price: </label> {{$ads->price_cents}}€ </p>
+                    <p><label class="control-label" for="price">Last Price: </label> {{$ads->price_cents}}€ </p>
 
                     <p><label class="control-label" for="name">Available Until: </label> {{$ads->available_until}}</p>
                    
 
-                    <a href="/advertisement/bid/{{$ads->id}}"><button class="btn btn-primary">Bid</button></a>
+                    <button  data-toggle="modal" data-target="#newBid" data-id="{{$ads->id}}" data-price="{{$ads->price_cents}}" class="bid btn btn-primary">Bid</button></a>
 
                     @if(Auth::user()->id == $ads->user->id)
                     <a href="/advertisement/edit/{{$ads->id}}"><button class="btn btn-warning">Edit</button></a> 
@@ -107,5 +107,38 @@
 
             </div>
         </div>
+    </div>
+</div>
+
+<div id="newBid" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Place a Bid</h4>
+          </div>
+          <div class="modal-body">  
+            <div class="container">
+                <div class="col-sm-5 col-md-6">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/advertisement/view/' . $ads->id . '/bid') }}">
+                     {{ csrf_field() }}
+                    <p><label class="control-label" for="lastBid">Last Bid: </label> {{$ads->price_cents}} </p>
+                    <label class="control-label" for="price_cents">Value to bid: </label> <input type="text" name="price_cents" id="price_cents">
+                    <label class="control-label" for="trade_prefs">Trade Prefs: </label> <input type="text" name="trade_prefs" id="trade_prefs">
+
+                    <label class="control-label" for="quantity">Quantity: </label> <input type="text" name="quantity" id="quantity">
+                    <label class="control-label" for="trade_location">Trade Location: </label> <input type="text" name="trade_location" id="trade_location">
+                    <label class="control-label" for="comment">Comments: </label> <textarea name="comment" id="comment"></textarea>
+                    <br/><br/>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-gavel"></i>Place a Bid
+                    </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 </div>

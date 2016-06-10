@@ -17,18 +17,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <?php /* <link href="<?php echo e(elixir('css/app.css')); ?>" rel="stylesheet"> */ ?>
 
-    <link media="all" type="text/css" rel="stylesheet"
-                href="assets/css/style.min.css">
+    <link media="all" type="text/css" rel="stylesheet" href="/assets/css/style.min.css">
 
-    <style>
-        body {
-            font-family: 'Lato';
-        }
-
-        .fa-btn {
-            margin-right: 6px;
-        }
-    </style>
 </head>
 <body id="app-layout" >
     <nav class="navbar navbar-default navbar-static-top">
@@ -53,11 +43,22 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="<?php echo e(url('/home')); ?>">Home</a></li>
-                    <li><a href="<?php echo e(url('/advertisement/index')); ?>">Advertisements</a></li>
+                    <li><a href="<?php echo e(url('/advertisement/index')); ?>">Advertisements</a></li> 
                 </ul>
+
+                <div class="col-md-4">
+                    <form action="" class="search-form">
+                        <div class="form-group has-feedback">
+                            <label for="search" class="sr-only">Search</label>
+                            <input type="text" class="form-control" name="search" id="search" placeholder="search">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </form>
+                </div>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+
                     <!-- Authentication Links -->
                     <?php if(Auth::guest()): ?>
                         <li><a data-toggle="modal" data-target="#login" href="#">Login</a></li>

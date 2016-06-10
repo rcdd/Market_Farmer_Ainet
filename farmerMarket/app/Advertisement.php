@@ -26,5 +26,9 @@ class Advertisement extends Model
         return $this->hasMany('App\Comments');
     }
 
+    public function bids()
+    {
+        return $this->hasMany('App\Bids');
+    }
 
 }
