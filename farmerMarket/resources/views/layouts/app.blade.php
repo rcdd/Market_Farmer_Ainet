@@ -71,7 +71,7 @@
                             
                             <ul class="dropdown-menu" role="menu">
                                 @if(Auth::user()->admin)
-                                <li><a href="{{ url('/ownAds/'. Auth::user()->id ) }}"><i class="fa fa-btn fa-users"></i> List of Users</a></li>
+                                <li><a href="{{ url('/users/') }}"><i class="fa fa-btn fa-users"></i> List of Users</a></li>
                                 @endif
                                 <li><a href="{{ url('/ownAds/'. Auth::user()->id ) }}"><i class="fa fa-btn fa-list"></i> My Ads</a></li>
                                 <li><a href="{{ url('/users/edit/'. Auth::user()->id ) }}"><i class="fa fa-btn fa-cog"></i> Profile</a></li>
@@ -90,7 +90,7 @@
                     <div class="alert alert-danger">{{ Session::get('error') }}</div>
                 @endif
                 @if (Session::has('success'))
-                    <div class="alert alert-success">{{ Session::get('error') }}</div>
+                    <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
                 <div class="panel-heading">{{isset($title) ? $title : "" }}</div>
                 <div class="panel-body">

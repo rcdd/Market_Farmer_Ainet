@@ -96,6 +96,8 @@ trait AuthenticatesUsers
         $this->validate($request, [
             $this->loginUsername() => 'required', 'password' => 'required',
         ]);
+
+        return "sdf";
     }
 
     /**

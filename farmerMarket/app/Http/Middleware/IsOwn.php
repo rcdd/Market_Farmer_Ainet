@@ -33,12 +33,23 @@ class IsOwn {
     public function handle($request, Closure $next)
     {
         //return var_dump($request->id);
-        if($this->auth->user()->id != $request->id)
+        //return var_dump($this->auth->user()->admin);
+        $allowed = false;
+        if($this->auth->user()->admin){
+            $allowed = true;
+        }else if($this->auth->user()->id == $request->id)
         {
+            $allowed = true;
+        }
+
+        if($allowed = true){
+            return $next($request);
+        }else{  
             session()->flash('error','Resource not allowed to you!');
             return redirect('/home');
         }
-        return $next($request);
+
+       
     }
 
 }

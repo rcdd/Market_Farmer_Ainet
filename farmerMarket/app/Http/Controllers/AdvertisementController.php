@@ -35,11 +35,13 @@ class AdvertisementController extends Controller
         }
 
         $ads->delete();
+         session()->flash('success','Advertisement Deleted');
         return redirect('/advertisement/index');
     }
  
     public function newAdvertisement(){
-        return view('advertisements.new', ['title' => "New Advertisement"]);
+        $ads = new Advertisement();
+        return view('advertisements.new', ['ads' => $ads, 'title' => "New Advertisement"]);
     }
  
     public function add() {
@@ -73,9 +75,56 @@ class AdvertisementController extends Controller
             $media->save();
         }
 
- 
+        
+        session()->flash('success','Advertisement added');
         return redirect('/advertisement/index');
  
+    }
+
+
+    public function edit($id){
+        $ads = Advertisement::findOrFail($id);
+        $title = "Edit Advertisement :: " . $ads->name;
+        return view('advertisements.edit', compact('ads', 'title'));
+    }
+
+    public function update($id, Request $request){
+        $ads = Advertisement::findOrFail($id);
+
+        $ads->owner_id=Request::input('owner_id');
+        $ads->name =Request::input('name');
+        $ads->description =Request::input('description');
+        $ads->price_cents =Request::input('price_cents');
+        $ads->available_on =Request::input('available_on');
+        $ads->available_until =Request::input('available_until');
+        $ads->trade_prefs =Request::input('trade_prefs');
+        $ads->quantity =Request::input('quantity');
+
+        $ads->save();
+
+        //image field
+        if($file = Request::file('photo_path')){
+            $extension = $file->getClientOriginalExtension();
+            Storage::disk('local')->put("ads/" . $file->getFilename().'.'.$extension,  File::get($file));
+     
+
+            $media = new Media();
+            $media->mime_type = $file->getClientMimeType();
+            $media->photo_path = $file->getFilename().'.'.$extension;
+            // falta de tempo para mostrar varias -- to update
+            if($ads->medias){
+                $ads->medias()->delete();
+            }
+            $media->advertisement()->associate($ads);
+            //end image field
+
+            $media->save();
+        }
+
+        
+        session()->flash('success','Advertisement updated');
+        return redirect('/advertisement/view/' . $id);
+
     }
 
     public function viewAdvertisement($id){

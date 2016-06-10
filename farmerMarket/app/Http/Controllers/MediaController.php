@@ -37,10 +37,10 @@ class MediaController extends Controller {
 
 	public function getImageProfile($id){
 		$user = User::findOrFail($id);
-		//$entry = $user->where('id', '=', $id)->firstOrFail();
-		if(!Storage::disk('local')->exists("profile/". $user->profile_photo)){
+
+		if($user->profile_photo == null || !Storage::disk('local')->exists("profile/". $user->profile_photo)){
 			$file = Storage::disk('local')->get("/user_not_found.png");
-			return (new Response($file, 200))->header('Content-Type', $user->mime_type);
+			return (new Response($file, 200))->header('Content-Type', 'image/png');
 		}
 
 		$file = Storage::disk('local')->get("profile/". $user->profile_photo);

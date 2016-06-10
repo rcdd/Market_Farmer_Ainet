@@ -71,7 +71,7 @@
                             
                             <ul class="dropdown-menu" role="menu">
                                 <?php if(Auth::user()->admin): ?>
-                                <li><a href="<?php echo e(url('/ownAds/'. Auth::user()->id )); ?>"><i class="fa fa-btn fa-users"></i> List of Users</a></li>
+                                <li><a href="<?php echo e(url('/users/')); ?>"><i class="fa fa-btn fa-users"></i> List of Users</a></li>
                                 <?php endif; ?>
                                 <li><a href="<?php echo e(url('/ownAds/'. Auth::user()->id )); ?>"><i class="fa fa-btn fa-list"></i> My Ads</a></li>
                                 <li><a href="<?php echo e(url('/users/edit/'. Auth::user()->id )); ?>"><i class="fa fa-btn fa-cog"></i> Profile</a></li>
@@ -90,7 +90,7 @@
                     <div class="alert alert-danger"><?php echo e(Session::get('error')); ?></div>
                 <?php endif; ?>
                 <?php if(Session::has('success')): ?>
-                    <div class="alert alert-success"><?php echo e(Session::get('error')); ?></div>
+                    <div class="alert alert-success"><?php echo e(Session::get('success')); ?></div>
                 <?php endif; ?>
                 <div class="panel-heading"><?php echo e(isset($title) ? $title : ""); ?></div>
                 <div class="panel-body">

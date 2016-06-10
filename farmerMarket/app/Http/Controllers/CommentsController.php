@@ -29,6 +29,20 @@ class CommentsController extends Controller
 
         $com->save();
 
+        session()->flash('success','Comment added');
+        return redirect()->back();
+    }
+
+    public function delete($id){
+        $com = Comments::findOrFail($id);
+
+        if(count($com->hasReplay()) > 0){
+            $com->hasReplay()->delete();
+        }
+
+        $com->delete();
+
+        session()->flash('success','Comment(s) deleted');
         return redirect()->back();
     }
 }

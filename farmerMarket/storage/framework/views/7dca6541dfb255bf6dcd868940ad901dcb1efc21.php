@@ -1,9 +1,7 @@
 <?php $__env->startSection('title', 'Listagem de utilizadores'); ?>
 
 <?php $__env->startSection('content'); ?>
-<a class="btn btn-primary" href="/users/create">Add user</a>
 
-<a class="btn btn-warning" href="logout.php">Logout</a></div>
 <?php if(count($users)): ?>
     <table class="table table-striped">
     <thead>
@@ -21,16 +19,25 @@
             <td><?php echo e($user->email); ?></td>
             <td><?php echo e($user->name); ?></td>
             <td><?php echo e($user->created_at); ?></td>
-            <td><?php echo e($user->type); ?></td>
+            <td><?php echo e($user->admin ? "Admin" : "Regular"); ?></td>
             <td>
-                    <a class="btn btn-xs btn-primary" href="/users/edit/<?php echo e($user->id); ?>">Edit</a> 
-                
-                <form action="users-delete.php" method="post" class="inline">
-                    <input type="hidden" name="user_id" value="<?php echo e($user->user_id); ?>">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure in delete this user?');">Delete</button>
-                    </div>
-                </form>
+                    <a class="btn btn-xs btn-primary" href="<?php echo e(url('/users/edit/' . $user->id)); ?>">Edit</a> 
+                    <?php if($user->admin): ?>
+                        <a class="btn btn-xs btn-warning" href="<?php echo e(url('/users/revokeAdmin/' . $user->id)); ?>">Revoke Admin</a> 
+                    <?php else: ?>
+                        <a class="btn btn-xs btn-warning" href="<?php echo e(url('/users/becomeAdmin/' . $user->id)); ?>">Become Admin</a> 
+                    <?php endif; ?>
+                    
+                    <?php if(Auth::user()->id != $user->id): ?>
+                        <?php if($user->blocked): ?>
+                            <a class="btn btn-xs btn-warning" href="<?php echo e(url('/users/unblocked/' . $user->id)); ?>">Unblock</a> 
+                        <?php else: ?>
+                           <a class="btn btn-xs btn-warning" href="<?php echo e(url('/users/blocked/' . $user->id)); ?>">Block</a> 
+                        <?php endif; ?>
+                    <a href="<?php echo e(url('/users/delete/' . $user->id)); ?>">
+                        <button class="btn btn-xs btn-danger" onclick="return confirm('Are you sure in delete this user?');">Delete</button>
+                    </a>
+                    <?php endif; ?>
             </td>
         </tr>
     <?php endforeach; ?>

@@ -28,8 +28,12 @@
                    
 
                     <a href="/advertisement/bid/{{$ads->id}}"><button class="btn btn-primary">Bid</button></a>
-                    @if(Auth::user()->id == $ads->user->id || Auth::user()->admin)
+
+                    @if(Auth::user()->id == $ads->user->id)
                     <a href="/advertisement/edit/{{$ads->id}}"><button class="btn btn-warning">Edit</button></a> 
+                    @endif
+                    
+                    @if(Auth::user()->id == $ads->user->id || Auth::user()->admin)
                     <a href="/advertisement/destroy/{{$ads->id}}" onclick="return confirm('Are you sure?')"><button class="btn btn-danger">Del</button></a> 
                     @endif
 

@@ -20,7 +20,7 @@
 	            <button data-toggle="modal" data-target="#replayComment" data-id="{{$comment->id}}" class="replay btn btn-warning">
 	                    <i class="fa fa-mail-reply"></i> Replay
 	            </button>
-	            @if(Auth::user()->id == $comment->user->id || Auth::user()->admin)
+	            @if(Auth::user()->admin)
 	            <a href="{{url('/comment/delete/' . $comment->id) }}"><button class="replay btn btn-danger">
 	                    <i class="fa fa-close"></i> Delete
 	            </button></a>
@@ -47,9 +47,9 @@
 				            <label class="control-label" for="user">Mensage: </label>
 				            {{$com->comment}}
 				        </div>
-				        @if(Auth::user()->id == $comment->user->id || Auth::user()->admin)
+				        @if(Auth::user()->admin)
 				        <div class="col-md-2">
-							<a href="{{url('/comment/delete/' . $comment->id) }}"><button class="replay btn btn-danger">
+							<a href="{{url('/comment/delete/' . $com->id) }}"><button class="replay btn btn-danger">
 	                    	<i class="fa fa-close"></i> Delete
 	            			</button></a>
 				        </div>

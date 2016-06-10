@@ -26,8 +26,12 @@
                    
 
                     <a href="/advertisement/bid/<?php echo e($ads->id); ?>"><button class="btn btn-primary">Bid</button></a>
-                    <?php if(Auth::user()->id == $ads->user->id || Auth::user()->admin): ?>
+
+                    <?php if(Auth::user()->id == $ads->user->id): ?>
                     <a href="/advertisement/edit/<?php echo e($ads->id); ?>"><button class="btn btn-warning">Edit</button></a> 
+                    <?php endif; ?>
+                    
+                    <?php if(Auth::user()->id == $ads->user->id || Auth::user()->admin): ?>
                     <a href="/advertisement/destroy/<?php echo e($ads->id); ?>" onclick="return confirm('Are you sure?')"><button class="btn btn-danger">Del</button></a> 
                     <?php endif; ?>
 
