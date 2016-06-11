@@ -68,7 +68,6 @@ class AdvertisementController extends Controller
             $media->mime_type = $file->getClientMimeType();
             $media->photo_path = $file->getFilename().'.'.$extension;
 
-            //$advertisement->integer('id')->unsigned();
             $media->advertisement()->associate($advertisement);
             //end image field
 

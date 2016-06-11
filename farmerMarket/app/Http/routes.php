@@ -36,7 +36,7 @@ Route::get('/advertisement/destroy/{id}', ['middleware'=>'auth','uses' => 'Adver
 
 //bids
 Route::post('/advertisement/view/{id}/bid', ['middleware'=>'auth', 'uses' => 'BidsController@placeBid']);
-
+Route::get('/bids/view/{id}', ['middleware'=>'is.own','uses' => 'BidsController@showMyBids']);
 
 // images 
 Route::get('/images/profile/{id}', 'MediaController@getImageProfile');

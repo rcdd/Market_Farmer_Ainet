@@ -75,6 +75,7 @@
                                 <li><a href="<?php echo e(url('/users/')); ?>"><i class="fa fa-btn fa-users"></i> List of Users</a></li>
                                 <?php endif; ?>
                                 <li><a href="<?php echo e(url('/ownAds/'. Auth::user()->id )); ?>"><i class="fa fa-btn fa-list"></i> My Ads</a></li>
+                                <li><a href="<?php echo e(url('/bids/view/'. Auth::user()->id )); ?>"><i class="fa fa-btn fa-gavel"></i> My Bids</a></li>
                                 <li><a href="<?php echo e(url('/users/edit/'. Auth::user()->id )); ?>"><i class="fa fa-btn fa-cog"></i> Profile</a></li>
                                 <li><a href="<?php echo e(url('/logout')); ?>"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>

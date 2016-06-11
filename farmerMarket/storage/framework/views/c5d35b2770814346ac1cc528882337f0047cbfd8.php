@@ -20,7 +20,11 @@
 
                     <p><label class="control-label" for="price">Open Price: </label> <?php echo e($ads->price_cents); ?>€ </p>
 
-                    <p><label class="control-label" for="price">Last Price: </label> <?php echo e($ads->price_cents); ?>€ </p>
+                    <p><label class="control-label" for="price">Last Price: </label> 
+                    <?php echo e(isset($ads->lastBid->price_cents) ? $ads->lastBid->price_cents : $ads->price_cents); ?>
+
+                    € 
+                    </p>
 
                     <p><label class="control-label" for="name">Available Until: </label> <?php echo e($ads->available_until); ?></p>
                    
@@ -123,7 +127,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/advertisement/view/' . $ads->id . '/bid')); ?>">
                      <?php echo e(csrf_field()); ?>
 
-                    <p><label class="control-label" for="lastBid">Last Bid: </label> <?php echo e($ads->price_cents); ?> </p>
+                    <p><label class="control-label" for="lastBid">Last Bid: </label> <?php echo e(isset($ads->lastBid->price_cents) ? $ads->lastBid->price_cents : $ads->price_cents); ?>€ </p>
                     <label class="control-label" for="price_cents">Value to bid: </label> <input type="text" name="price_cents" id="price_cents">
                     <label class="control-label" for="trade_prefs">Trade Prefs: </label> <input type="text" name="trade_prefs" id="trade_prefs">
 

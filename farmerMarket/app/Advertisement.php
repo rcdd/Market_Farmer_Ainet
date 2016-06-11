@@ -31,4 +31,9 @@ class Advertisement extends Model
         return $this->hasMany('App\Bids');
     }
 
+    public function lastBid()
+    {
+       return $this->hasOne('App\Bids')->latest();
+    }
+
 }
