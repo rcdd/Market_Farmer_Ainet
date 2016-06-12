@@ -37,12 +37,12 @@
                        <div class="row col-md-offset-3">
                             <label class="col-md-2 control-label" for="price_cents">Price</label>
                             <div class="col-md-3">
-                                <input id="price_cents" name="price_cents" type="number" placeholder="Price" class="form-control input-md"  value="{{ old('price_cents', $ads->price_cents) }}">
+                                <input id="price_cents" name="price_cents" min="0" step="0.01" type="number" placeholder="Price" class="form-control input-md"  value="{{ old('price_cents', $ads->price_cents) }}">
                             </div>
                             
                             <label class="col-md-2 control-label" for="quantity">Quantity</label>
                             <div class="col-md-3">
-                                <input id="quantity" name="quantity" type="number" placeholder="Quantity" class="form-control input-md"  value="{{ old('quantity', $ads->quantity) }}">
+                                <input id="quantity" name="quantity" type="number" min="0" placeholder="Quantity" class="form-control input-md"  value="{{ old('quantity', $ads->quantity) }}">
                             </div>
 
                         </div>

@@ -64,6 +64,7 @@
                         <li><a data-toggle="modal" data-target="#login" href="#">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
+
                         <li><img src="{{ url('/images/profile/'. Auth::user()->id ) }}" alt="Profile Picture" width="50" height="50"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle  fa fa-user" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -71,13 +72,16 @@
                             </a>
                             
                             <ul class="dropdown-menu" role="menu">
-                                @if(Auth::user()->admin)
-                                <li><a href="{{ url('/users/') }}"><i class="fa fa-btn fa-users"></i> List of Users</a></li>
-                                @endif
+
                                 <li><a href="{{ url('/ownAds/'. Auth::user()->id ) }}"><i class="fa fa-btn fa-list"></i> My Ads</a></li>
                                 <li><a href="{{ url('/bids/view/'. Auth::user()->id ) }}"><i class="fa fa-btn fa-gavel"></i> My Bids</a></li>
                                 <li><a href="{{ url('/users/edit/'. Auth::user()->id ) }}"><i class="fa fa-btn fa-cog"></i> Profile</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                @if(Auth::user()->admin)
+                                <li>----------- < Admin > -----------<li>
+                                <li><a href="{{ url('/users/') }}"><i class="fa fa-btn fa-users"></i> List of Users</a></li>
+                                <li><a href="{{ url('/advertisement/blocked') }}"><i class="fa fa-btn fa-ban "></i> List of Blocked Ads</a></li>
+                                @endif
                             </ul>
                         </li>
                     @endif
@@ -94,6 +98,7 @@
                 @if (Session::has('success'))
                     <div class="alert alert-success">{{ Session::get('success') }}</div>
                 @endif
+                {{Session::reflash()}}
                 <div class="panel-heading">{{isset($title) ? $title : "" }}</div>
                 <div class="panel-body">
     @yield('content')

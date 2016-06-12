@@ -96,8 +96,6 @@ trait AuthenticatesUsers
         $this->validate($request, [
             $this->loginUsername() => 'required', 'password' => 'required',
         ]);
-
-        return "sdf";
     }
 
     /**
@@ -115,6 +113,11 @@ trait AuthenticatesUsers
 
         if (method_exists($this, 'authenticated')) {
             return $this->authenticated($request, Auth::guard($this->getGuard())->user());
+        }
+
+        if(Auth::user()->blocked){
+            session()->flash('error','You have been blocked by admin. Please contact your admin.');
+            Auth::logout();
         }
 
         return redirect()->intended($this->redirectPath());
@@ -142,6 +145,7 @@ trait AuthenticatesUsers
      */
     protected function getFailedLoginMessage()
     {
+         session()->flash('error','These credentials do not match our records.');
         return Lang::has('auth.failed')
                 ? Lang::get('auth.failed')
                 : 'These credentials do not match our records.';

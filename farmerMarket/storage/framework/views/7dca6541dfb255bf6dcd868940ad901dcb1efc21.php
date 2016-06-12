@@ -15,20 +15,18 @@
     </thead>
     <tbody>
     <?php foreach($users as $user): ?>
-        <tr>
-            <td><?php echo e($user->email); ?></td>
-            <td><?php echo e($user->name); ?></td>
-            <td><?php echo e($user->created_at); ?></td>
-            <td><?php echo e($user->admin ? "Admin" : "Regular"); ?></td>
-            <td>
-                    <a class="btn btn-xs btn-primary" href="<?php echo e(url('/users/edit/' . $user->id)); ?>">Edit</a> 
+        <?php if(Auth::user()->id != $user->id): ?>
+            <tr>
+                <td><?php echo e($user->email); ?></td>
+                <td><?php echo e($user->name); ?></td>
+                <td><?php echo e($user->created_at); ?></td>
+                <td><?php echo e($user->admin ? "Admin" : "Regular"); ?></td>
+                <td>                    
                     <?php if($user->admin): ?>
                         <a class="btn btn-xs btn-warning" href="<?php echo e(url('/users/revokeAdmin/' . $user->id)); ?>">Revoke Admin</a> 
                     <?php else: ?>
                         <a class="btn btn-xs btn-warning" href="<?php echo e(url('/users/becomeAdmin/' . $user->id)); ?>">Become Admin</a> 
                     <?php endif; ?>
-                    
-                    <?php if(Auth::user()->id != $user->id): ?>
                         <?php if($user->blocked): ?>
                             <a class="btn btn-xs btn-warning" href="<?php echo e(url('/users/unblocked/' . $user->id)); ?>">Unblock</a> 
                         <?php else: ?>
@@ -37,9 +35,9 @@
                     <a href="<?php echo e(url('/users/delete/' . $user->id)); ?>">
                         <button class="btn btn-xs btn-danger" onclick="return confirm('Are you sure in delete this user?');">Delete</button>
                     </a>
-                    <?php endif; ?>
-            </td>
-        </tr>
+                </td>
+            </tr>
+        <?php endif; ?>
     <?php endforeach; ?>
     </table>
 <?php else: ?>

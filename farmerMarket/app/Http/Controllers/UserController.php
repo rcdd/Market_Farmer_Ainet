@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
+use Auth;
 
 //files
 use Illuminate\Support\Facades\Storage;
@@ -76,6 +77,12 @@ class UserController extends Controller
 
     public function edit($id){
     	$user = User::findOrFail($id);
+
+        if($user->id != Auth::user()->id){
+            session()->flash('error','Resource not allowed to you!');
+            return redirect('/');
+        }
+
         $title = "Edit User";
     	//return view('users.edit', ['id' => $id]);
     	return view('auth.edit', compact('id', 'user', 'title'));
@@ -85,6 +92,11 @@ class UserController extends Controller
 	{
 	    $user = User::findOrFail($id);
 	    
+        if($user->id != Auth::id()){
+            session()->flash('error','Resource not allowed to you!');
+            return redirect('/');
+        }
+
 	    $rules = array(
             'name'  => 'Required|Min:3|Max:80|Alpha',
             'email'     => 'Required|Between:3,64|Email',
@@ -122,12 +134,14 @@ class UserController extends Controller
 // tests porposal
     public function delete($id){ 
     	$user = User::findOrFail($id);
+
         if($user->comments)
             $user->comments()->delete();
 
         if($user->advertisements){
             $user->advertisements()->delete();
         }
+        
         $user->delete();
         session()->flash('success','User deleted!');
         return redirect()->back();
@@ -136,6 +150,12 @@ class UserController extends Controller
     public function viewOwnAdvertisements($id){
         $title = "My Advertisements ";
         $user = User::findOrFail($id);
+        
+        if($user->id != Auth::id()){
+            session()->flash('error','Resource not allowed to you!');
+            return redirect('/');
+        }
+
         if(count($user->advertisements) > 0){
             $advertisements = $user->advertisements()->get();
         }else{

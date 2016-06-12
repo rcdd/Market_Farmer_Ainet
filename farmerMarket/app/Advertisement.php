@@ -33,7 +33,7 @@ class Advertisement extends Model
 
     public function lastBid()
     {
-       return $this->hasOne('App\Bids')->latest();
+       return $this->hasOne('App\Bids')->where('status', '=' , '1')->max('price_cents');
     }
 
 }

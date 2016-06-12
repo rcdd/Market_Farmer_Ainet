@@ -2,6 +2,7 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Auth;
 
 class IsAdmin {
 
@@ -31,7 +32,11 @@ class IsAdmin {
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
+    { 
+        if (Auth::guest()) {
+
+            return redirect('/');
+        }
         if(!$this->auth->user()->admin)
         {
             session()->flash('error','This resource is restricted to Administrators!');

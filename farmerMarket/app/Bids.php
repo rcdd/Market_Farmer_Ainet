@@ -20,4 +20,23 @@ class Bids extends Model
     	$this->belongsTo('App\User', 'buyer_id');
     }
 
+     public function ads(){
+        return $this->hasOne('App\Advertisement');
+    }
+
+
+    public function bidStatusToString(){
+        switch ($this->status) {
+            case 0:
+                return 'Canceled';
+            case 1:
+                return 'Pending';
+            case 2:
+                return 'Refused';
+            case 3:
+                return 'Accepted';
+        }
+        return 'Unknown';
+    }
+
 }

@@ -7,32 +7,30 @@
     <table class="table table-condensed table-striped ">
         <thead>
             <tr>
-                <th>Advertisement</th>
-                <th>Description</th>                
-                <th>Bid placed</th>                
-                <th>Bid Actual</th>             
-                <th>Bid Status</th>
+                <th>Price</th>
+                <th>Trade Prefs</th>                
+                <th>Quantity</th>                
+                <th>Trade Location</th>             
+                <th>Comment</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
 
             @foreach($bids as $bid)
-                <tr class=" @if($bid['bid']->status ==  2) danger @elseif($bid['bid']->status ==  3) success @endif" >
-                    <td>{{ $bid['advertisement']->name }}</td>
-                    <td>{{ $bid['advertisement']->description }}</td>
-                    <td>{{ $bid['bid']->price_cents }}</td>
-                    <td>{{ $bid['advertisement']->lastBid() }} </td>
-                    <td>{{ $bid['bid']->bidStatusToString() }}</td>
+                <tr class=" @if($bid->status ==  2) danger @elseif($bid->status ==  3) success @endif" >
+                    <td>{{ $bid->price_cents }}</td>
+                    <td>{{ $bid->trade_prefs }}</td>
+                    <td>{{ $bid->quantity }}</td>
+                    <td>{{ $bid->trade_location }} </td>
+                    <td>{{ $bid->comment }}</td>
                     <td>
-                        @if($bid['bid']->status ==  1)
-                            <button data-toggle="modal" data-target="#changeBid" data-idbid="{{ $bid['bid']->id }}" data-lastbid="{{ $bid['advertisement']->lastBid() }}" data-idads="{{ $bid['advertisement']->id }}" class="change btn btn-xs btn-warning">Change</button>
-                            <a href="{{ url('/bids/delete/' . $bid['bid']->id) }}">
-                                <button class="btn btn-xs btn-danger" onclick="return confirm('Are you sure in cancel this bid?');">Cancel</button>
-                            </a>
-                        @else
-                        Not alowed
-                        @endif
+                        <a href="{{ url('/bids/accept/' . $bid->id) }}">
+                        <button class="change btn btn-xs btn-success">Accept</button>
+                        </a>
+                        <a href="{{ url('/bids/refuse/' . $bid->id) }}">
+                        <button class="change btn btn-xs btn-danger">Refuse</button>
+                        </a>
                     </td>
                 </tr>
             @endforeach
@@ -82,10 +80,10 @@
                      <input type="hidden" name="id_bid" id="id_bid" value="" />
                     <p><label class="control-label" >Last Bid: </label> <span id="last_bid"></span>€</p>
 
-                    <label class="control-label" for="price_cents">Value to bid: </label> <input type="text" min="0" step="0.01" name="price_cents" id="price_cents">
+                    <label class="control-label" for="price_cents">Value to bid: </label> <input type="text" name="price_cents" id="price_cents">
                     <label class="control-label" for="trade_prefs">Trade Prefs: </label> <input type="text" name="trade_prefs" id="trade_prefs">
 
-                    <label class="control-label" for="quantity">Quantity: </label> <input type="text" min="0" name="quantity" id="quantity">
+                    <label class="control-label" for="quantity">Quantity: </label> <input type="text" name="quantity" id="quantity">
                     <label class="control-label" for="trade_location">Trade Location: </label> <input type="text" name="trade_location" id="trade_location">
                     <label class="control-label" for="comment">Comments: </label> <textarea name="comment" id="comment"></textarea>
                     <br/><br/>

@@ -1,4 +1,7 @@
 <?php $__env->startSection('content'); ?>
+<?php if($ads->blocked): ?>
+    <div class="alert alert-danger">This advertisement is blocked!</div>
+<?php endif; ?>
 <div class="container">
 
 
@@ -21,23 +24,33 @@
                     <p><label class="control-label" for="price">Open Price: </label> <?php echo e($ads->price_cents); ?>€ </p>
 
                     <p><label class="control-label" for="price">Last Price: </label> 
-                    <?php echo e(isset($ads->lastBid->price_cents) ? $ads->lastBid->price_cents : $ads->price_cents); ?>
+                    <?php echo e($ads->lastBid() ? $ads->lastBid() : $ads->price_cents); ?>
 
                     € 
                     </p>
-
+                    <?php if($ads->available_until): ?>
                     <p><label class="control-label" for="name">Available Until: </label> <?php echo e($ads->available_until); ?></p>
-                   
+                    <?php endif; ?>
 
-                    <button  data-toggle="modal" data-target="#newBid" data-id="<?php echo e($ads->id); ?>" data-price="<?php echo e($ads->price_cents); ?>" class="bid btn btn-primary">Bid</button></a>
+                    <button  data-toggle="modal" data-target="#newBid" data-id="<?php echo e($ads->id); ?>" data-price="<?php echo e($ads->price_cents); ?>" class="bid btn btn-info">Bid</button></a>
 
                     <?php if(Auth::user()->id == $ads->user->id): ?>
-                    <a href="/advertisement/edit/<?php echo e($ads->id); ?>"><button class="btn btn-warning">Edit</button></a> 
+                    <a href="/advertisement/edit/<?php echo e($ads->id); ?>"><button class="btn btn-primary">Edit</button></a> 
+                    <a href="/advertisement/view/<?php echo e($ads->id); ?>/viewBids"><button class="btn btn-success">View Bids</button></a> 
+                    <?php endif; ?>
+
+                    <?php if(Auth::user()->admin): ?>
+                            <?php if($ads->blocked): ?>
+                                    <a href="/advertisement/status/<?php echo e($ads->id); ?>"><button class="btn btn-warning">UnBlock</button></a>
+                            <?php else: ?>
+                                    <a href="/advertisement/status/<?php echo e($ads->id); ?>" onclick="return confirm('Are you sure?')"><button class="btn btn-warning">Block</button></a>
+                            <?php endif; ?> 
                     <?php endif; ?>
                     
                     <?php if(Auth::user()->id == $ads->user->id || Auth::user()->admin): ?>
                     <a href="/advertisement/destroy/<?php echo e($ads->id); ?>" onclick="return confirm('Are you sure?')"><button class="btn btn-danger">Del</button></a> 
                     <?php endif; ?>
+                    
 
                 </div>
             </div>
@@ -127,7 +140,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/advertisement/view/' . $ads->id . '/bid')); ?>">
                      <?php echo e(csrf_field()); ?>
 
-                    <p><label class="control-label" for="lastBid">Last Bid: </label> <?php echo e(isset($ads->lastBid->price_cents) ? $ads->lastBid->price_cents : $ads->price_cents); ?>€ </p>
+                    <p><label class="control-label" for="lastBid">Last Bid: </label> <?php echo e($ads->lastBid() ? $ads->lastBid() : $ads->price_cents); ?>€ </p>
                     <label class="control-label" for="price_cents">Value to bid: </label> <input type="text" name="price_cents" id="price_cents">
                     <label class="control-label" for="trade_prefs">Trade Prefs: </label> <input type="text" name="trade_prefs" id="trade_prefs">
 

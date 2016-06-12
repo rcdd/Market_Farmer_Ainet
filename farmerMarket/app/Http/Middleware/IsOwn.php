@@ -2,7 +2,8 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-
+use Auth;
+use App\Advertisement;
 class IsOwn {
 
     /**
@@ -34,15 +35,23 @@ class IsOwn {
     {
         //return var_dump($request->id);
         //return var_dump($this->auth->user()->admin);
+
+        if (Auth::guest()) {
+
+            return redirect('/');
+        }
+
         $allowed = false;
-        if($this->auth->user()->admin){
-            $allowed = true;
-        }else if($this->auth->user()->id == $request->id)
-        {
+        if(Auth::user()->admin){
             $allowed = true;
         }
 
-        if($allowed = true){
+        /*if(Auth::user()->id == $request->owner_id)
+        {
+            $allowed = true;
+        }*/
+        
+        if($allowed == true){
             return $next($request);
         }else{  
             session()->flash('error','Resource not allowed to you!');

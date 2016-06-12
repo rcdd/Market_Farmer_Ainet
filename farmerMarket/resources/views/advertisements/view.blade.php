@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@if ($ads->blocked)
+    <div class="alert alert-danger">This advertisement is blocked!</div>
+@endif
 <div class="container">
 
 
@@ -23,22 +26,32 @@
                     <p><label class="control-label" for="price">Open Price: </label> {{$ads->price_cents}}€ </p>
 
                     <p><label class="control-label" for="price">Last Price: </label> 
-                    {{ isset($ads->lastBid->price_cents) ? $ads->lastBid->price_cents : $ads->price_cents }}
+                    {{ $ads->lastBid() ? $ads->lastBid() : $ads->price_cents }}
                     € 
                     </p>
-
+                    @if($ads->available_until)
                     <p><label class="control-label" for="name">Available Until: </label> {{$ads->available_until}}</p>
-                   
+                    @endif
 
-                    <button  data-toggle="modal" data-target="#newBid" data-id="{{$ads->id}}" data-price="{{$ads->price_cents}}" class="bid btn btn-primary">Bid</button></a>
+                    <button  data-toggle="modal" data-target="#newBid" data-id="{{$ads->id}}" data-price="{{$ads->price_cents}}" class="bid btn btn-info">Bid</button></a>
 
                     @if(Auth::user()->id == $ads->user->id)
-                    <a href="/advertisement/edit/{{$ads->id}}"><button class="btn btn-warning">Edit</button></a> 
+                    <a href="/advertisement/edit/{{$ads->id}}"><button class="btn btn-primary">Edit</button></a> 
+                    <a href="/advertisement/view/{{$ads->id}}/viewBids"><button class="btn btn-success">View Bids</button></a> 
+                    @endif
+
+                    @if(Auth::user()->admin)
+                            @if($ads->blocked)
+                                    <a href="/advertisement/status/{{$ads->id}}"><button class="btn btn-warning">UnBlock</button></a>
+                            @else
+                                    <a href="/advertisement/status/{{$ads->id}}" onclick="return confirm('Are you sure?')"><button class="btn btn-warning">Block</button></a>
+                            @endif 
                     @endif
                     
                     @if(Auth::user()->id == $ads->user->id || Auth::user()->admin)
                     <a href="/advertisement/destroy/{{$ads->id}}" onclick="return confirm('Are you sure?')"><button class="btn btn-danger">Del</button></a> 
                     @endif
+                    
 
                 </div>
             </div>
@@ -128,7 +141,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/advertisement/view/' . $ads->id . '/bid') }}">
                      {{ csrf_field() }}
                     <p><label class="control-label" for="lastBid">Last Bid: </label> {{
-                    isset($ads->lastBid->price_cents) ? $ads->lastBid->price_cents : $ads->price_cents}}€ </p>
+                    $ads->lastBid() ? $ads->lastBid() : $ads->price_cents}}€ </p>
                     <label class="control-label" for="price_cents">Value to bid: </label> <input type="text" name="price_cents" id="price_cents">
                     <label class="control-label" for="trade_prefs">Trade Prefs: </label> <input type="text" name="trade_prefs" id="trade_prefs">
 
