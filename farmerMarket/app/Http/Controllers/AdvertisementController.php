@@ -26,7 +26,7 @@ class AdvertisementController extends Controller
                 $query->whereDate('available_until', '>', date('Y-m-d'))
                     ->orWhere('available_until', '=', null);
             })->get();
-        
+
         return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
     }
  
@@ -86,6 +86,7 @@ class AdvertisementController extends Controller
 
         //image field
         if($file = $request->file('photo_path')){
+            //if (Input::file('photo')->isValid())
             $extension = $file->getClientOriginalExtension();
             Storage::disk('local')->put("ads/" . $file->getFilename().'.'.$extension,  File::get($file));
      
@@ -184,7 +185,11 @@ class AdvertisementController extends Controller
     public function viewAdvertisement($id){
         $ads = Advertisement::findOrFail($id);
         $title = "Advertisement :: " . $ads->name;
-        $comments = $ads->comments()->where('parent_id', null)->get();
+        if(Auth::user()->admin)
+            $comments = $ads->comments()->where('parent_id', null)->get();
+        else
+            $comments = $ads->comments()->where('blocked', '0')->where('parent_id', null)->get();
+
         return view('advertisements.view', compact('ads', 'comments', 'title'));
     }
 
@@ -200,8 +205,27 @@ class AdvertisementController extends Controller
 
     public function blocked(){
          $advertisements = Advertisement::where('blocked', '=', '1')->get();
+         if(count($advertisements) == 0)
+         {
+            $advertisements = "";
+         }
         return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Blocked Advertisements"]);
     }
 
+    public function close($id){
+        $ads = Advertisement::findOrFail($id);
+        
+        if($ads->owner_id != Auth::id()){
+            session()->flash('error','Resource not allowed to you!');
+            return redirect('/advertisement/index');
+        }
+
+        $ads->available_until = "0000-00-00 00:00:00";
+        $ads->save();
+
+        session()->flash('success','Advertisement has been Closed!');
+        return redirect('/advertisement/index');
+
+    }
     
 }

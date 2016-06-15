@@ -62,7 +62,7 @@ class UserController extends Controller
         	'name'  => $input['name'],
             'email'     => $input['email'],
         	'password' => password_hash ( $input['password'], PASSWORD_DEFAULT), 
-        	'admin' => $request->has('admin'),
+        	//'admin' => $request->has('admin'),
         	'location' => $input['location'],
         	'presentation' => $input['presentation'],
         	'profile_photo' => $profile_photo,
@@ -100,19 +100,25 @@ class UserController extends Controller
 	    $rules = array(
             'name'  => 'Required|Min:3|Max:80|Alpha',
             'email'     => 'Required|Between:3,64|Email',
-            'password'  =>'Required|AlphaNum|Between:4,8|Confirmed',
-            'password_confirmation'=>'Required',
+            'password'  =>'AlphaNum|Between:4,8|Confirmed',
         );
 
         // executar validate()
         $this->validate($request, $rules);
 
-
 	    $input = $request->all();
-		$user->fill($input);
+        //return var_dump($request);
 
-	    $user->password = password_hash ( $input['password'], PASSWORD_DEFAULT);
-	    $user->admin = $request->has('admin');
+        if( $input['password'] != "")
+        {
+            $user->password = password_hash ( $input['password'], PASSWORD_DEFAULT);
+        }
+
+	    $user->name = $input['name'];
+        $user->email = $input['email'];
+        $user->location = $input['location'];
+        $user->profile_url = $input['profile_url'];
+        $user->presentation = $input['presentation'];
 
         //image field
         if($request->hasFile('profile_photo')){

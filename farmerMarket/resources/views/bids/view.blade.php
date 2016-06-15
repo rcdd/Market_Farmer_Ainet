@@ -25,7 +25,7 @@
                     <td>{{ $bid['advertisement']->lastBid() }} </td>
                     <td>{{ $bid['bid']->bidStatusToString() }}</td>
                     <td>
-                        @if($bid['bid']->status ==  1)
+                        @if($bid['bid']->status ==  1 && $bid['advertisement']->blocked && $bid['advertisement']->available_until == '0000-00-00 00:00:00')
                             <button data-toggle="modal" data-target="#changeBid" data-idbid="{{ $bid['bid']->id }}" data-lastbid="{{ $bid['advertisement']->lastBid() }}" data-idads="{{ $bid['advertisement']->id }}" class="change btn btn-xs btn-warning">Change</button>
                             <a href="{{ url('/bids/delete/' . $bid['bid']->id) }}">
                                 <button class="btn btn-xs btn-danger" onclick="return confirm('Are you sure in cancel this bid?');">Cancel</button>

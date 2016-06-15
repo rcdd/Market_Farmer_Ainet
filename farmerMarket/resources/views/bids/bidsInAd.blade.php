@@ -2,8 +2,13 @@
 
 @section('content')
 
+@if($ads->blocked || $ads->available_until == '0000-00-00 00:00:00')
+<div class="alert alert-danger">This advertisement is blocked or out-of-date!</div>
+@endif
+
 @if (count($bids))
 <div class="table-responsive">
+
     <table class="table table-condensed table-striped ">
         <thead>
             <tr>
@@ -25,12 +30,23 @@
                     <td>{{ $bid->trade_location }} </td>
                     <td>{{ $bid->comment }}</td>
                     <td>
-                        <a href="{{ url('/bids/accept/' . $bid->id) }}">
-                        <button class="change btn btn-xs btn-success">Accept</button>
-                        </a>
-                        <a href="{{ url('/bids/refuse/' . $bid->id) }}">
-                        <button class="change btn btn-xs btn-danger">Refuse</button>
-                        </a>
+                    @if(!$ads->blocked && $ads->available_until != '0000-00-00 00:00:00')
+                        @if($bid->status ==  2 || $bid->status ==  1)
+                            <a href="{{ url('/bids/accept/' . $bid->id) }}">
+                            <button class="change btn btn-xs btn-success">Accept</button>
+                            </a>
+                        @endif
+                        @if($bid->status ==  3 || $bid->status ==  1) 
+                            <a href="{{ url('/bids/refuse/' . $bid->id) }}">
+                            <button class="change btn btn-xs btn-danger">Refuse</button>
+                            </a>
+                        @endif
+                        @if($bid->status ==  0)
+                        <i>Canceled</i>
+                        @endif
+                    @else
+                    <i>unavailable</i>
+                    @endif
                     </td>
                 </tr>
             @endforeach
@@ -39,6 +55,10 @@
 </div>
 @else
     <h2>No bids found</h2>
+@endif
+@if(!$ads->blocked && $ads->available_until != '0000-00-00 00:00:00')
+<a href="{{ url('/advertisement/close/' . $ads->id) }}" onclick="return confirm('Are you sure?')">
+                        <button class="change btn btn-xs btn-warning">Close this Advertisements</button>
 @endif
 
 <script type="text/javascript">

@@ -160,7 +160,7 @@ class BidsController extends Controller
 
 	public function acceptBid($id){
 		$bid = Bids::findOrFail($id);
-		$ads = Advertisement::where('id', '=', $bid->id);
+		$ads = Advertisement::findOrFail($bid->advertisement_id);
 
 		if($ads->owner_id != Auth::id()){
             session()->flash('error','Resource not allowed to you!');
@@ -174,7 +174,7 @@ class BidsController extends Controller
 
 	public function refuseBid($id){
 		$bid = Bids::findOrFail($id);
-		$ads = Advertisement::where('id', '=', $bid->id);
+		$ads = Advertisement::findOrFail($bid->advertisement_id);
 
 		if($ads->owner_id != Auth::id()){
             session()->flash('error','Resource not allowed to you!');
@@ -187,8 +187,9 @@ class BidsController extends Controller
 	}
 
 	public function viewBids($id){
-		$title = 'Bids in advertisement';
         $ads = Advertisement::findOrFail($id);
+
+		$title = 'Bids in advertisement :: '. $ads->name;
 
         if($ads->owner_id != Auth::id()){
             session()->flash('error','Resource not allowed to you!');
@@ -197,6 +198,6 @@ class BidsController extends Controller
 
         $bids = $ads->bids;
 
-		return view('bids.bidsInAd', compact('title', 'bids'));    
+		return view('bids.bidsInAd', compact('title', 'ads', 'bids'));    
     }
 }

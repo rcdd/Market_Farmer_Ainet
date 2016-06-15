@@ -35,6 +35,7 @@ Route::post('/advertisement/save', ['middleware'=>'auth','uses' => 'Advertisemen
 Route::get('/advertisement/destroy/{id}', ['middleware'=>'auth','uses' => 'AdvertisementController@destroy']);
 Route::get('/advertisement/status/{id}', ['middleware'=>'is.admin','uses' => 'AdvertisementController@status']);
 Route::get('/advertisement/blocked/', ['middleware'=>'is.admin','uses' => 'AdvertisementController@blocked']);
+Route::get('/advertisement/close/{id}', ['middleware'=>'auth','uses' => 'AdvertisementController@close']);
 
 //bids
 Route::post('/advertisement/view/{id}/bid', ['middleware'=>'auth', 'uses' => 'BidsController@placeBid']);
@@ -52,6 +53,8 @@ Route::get('/images/ads/{id}', 'MediaController@getImageAds');
 //comments
 Route::post('/comment/new', ['middleware'=>'auth', 'uses' => 'CommentsController@insert']);
 Route::get('/comment/delete/{id}', ['middleware'=>'auth', 'uses' => 'CommentsController@delete']);
+Route::get('/comment/block/{id}', ['middleware'=>'is.admin', 'uses' => 'CommentsController@block']);
+Route::get('/comment/unblock/{id}', ['middleware'=>'is.admin', 'uses' => 'CommentsController@unBlock']);
 
 //bids
 Route::post('/advertisement/view/{id}/bid', ['middleware'=>'auth', 'uses' => 'BidsController@placeBid']);

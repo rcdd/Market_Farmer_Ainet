@@ -31,7 +31,7 @@
                             <label class="col-md-4 control-label required">Password</label>
 
                             <div class="col-md-6">
-                                <input type="password" class="form-control" name="password" value="{{ old('password') }}">
+                                <input type="password" class="form-control" name="password" value="">
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">

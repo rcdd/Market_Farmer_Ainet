@@ -50,4 +50,22 @@ class CommentsController extends Controller
         session()->flash('success','Comment(s) deleted');
         return redirect()->back();
     }
+
+    public function block($id)
+    {
+        $com = Comments::findOrFail($id);
+        $com->blocked = '1';
+        $com->save();
+        session()->flash('success','Comment(s) blocked');
+        return redirect()->back();
+    }
+
+    public function unBlock($id)
+    {
+        $com = Comments::findOrFail($id);
+        $com->blocked = '0';
+        $com->save();
+        session()->flash('success','Comment(s) unblocked');
+        return redirect()->back();
+    }
 }

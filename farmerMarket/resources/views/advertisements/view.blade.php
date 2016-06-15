@@ -4,6 +4,9 @@
 @if ($ads->blocked)
     <div class="alert alert-danger">This advertisement is blocked!</div>
 @endif
+@if ($ads->available_until == '0000-00-00 00:00:00')
+    <div class="alert alert-danger">This advertisement is closed or out-of-date!</div>
+@endif
 <div class="container">
 
 
@@ -32,8 +35,9 @@
                     @if($ads->available_until)
                     <p><label class="control-label" for="name">Available Until: </label> {{$ads->available_until}}</p>
                     @endif
-
+                    @if(!$ads->blocked && $ads->available_until != '0000-00-00 00:00:00')
                     <button  data-toggle="modal" data-target="#newBid" data-id="{{$ads->id}}" data-price="{{$ads->price_cents}}" class="bid btn btn-info">Bid</button></a>
+                    @endif
 
                     @if(Auth::user()->id == $ads->user->id)
                     <a href="/advertisement/edit/{{$ads->id}}"><button class="btn btn-primary">Edit</button></a> 

@@ -2,6 +2,9 @@
 <?php if($ads->blocked): ?>
     <div class="alert alert-danger">This advertisement is blocked!</div>
 <?php endif; ?>
+<?php if($ads->available_until == '0000-00-00 00:00:00'): ?>
+    <div class="alert alert-danger">This advertisement is closed or out-of-date!</div>
+<?php endif; ?>
 <div class="container">
 
 
@@ -31,8 +34,9 @@
                     <?php if($ads->available_until): ?>
                     <p><label class="control-label" for="name">Available Until: </label> <?php echo e($ads->available_until); ?></p>
                     <?php endif; ?>
-
+                    <?php if(!$ads->blocked && $ads->available_until != '0000-00-00 00:00:00'): ?>
                     <button  data-toggle="modal" data-target="#newBid" data-id="<?php echo e($ads->id); ?>" data-price="<?php echo e($ads->price_cents); ?>" class="bid btn btn-info">Bid</button></a>
+                    <?php endif; ?>
 
                     <?php if(Auth::user()->id == $ads->user->id): ?>
                     <a href="/advertisement/edit/<?php echo e($ads->id); ?>"><button class="btn btn-primary">Edit</button></a> 
