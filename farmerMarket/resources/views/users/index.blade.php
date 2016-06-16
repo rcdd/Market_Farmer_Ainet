@@ -1,11 +1,9 @@
-@extends('layouts.backend')
+@extends('layouts.app')
 
 @section('title', 'Listagem de utilizadores')
 
 @section('content')
-<a class="btn btn-primary" href="/users/create">Add user</a>
 
-<a class="btn btn-warning" href="logout.php">Logout</a></div>
 @if (count($users))
     <table class="table table-striped">
     <thead>
@@ -19,22 +17,29 @@
     </thead>
     <tbody>
     @foreach ($users as $user)
-        <tr>
-            <td>{{ $user->email      }}</td>
-            <td>{{ $user->name       }}</td>
-            <td>{{ $user->created_at }}</td>
-            <td>{{ $user->type       }}</td>
-            <td>
-                    <a class="btn btn-xs btn-primary" href="/users/edit/{{ $user->id }}">Edit</a> 
-                
-                <form action="users-delete.php" method="post" class="inline">
-                    <input type="hidden" name="user_id" value="{{ $user->user_id }}">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure in delete this user?');">Delete</button>
-                    </div>
-                </form>
-            </td>
-        </tr>
+        @if(Auth::user()->id != $user->id)
+            <tr>
+                <td>{{ $user->email      }}</td>
+                <td>{{ $user->name       }}</td>
+                <td>{{ $user->created_at }}</td>
+                <td>{{ $user->admin ? "Admin" : "Regular"       }}</td>
+                <td>                    
+                    @if($user->admin)
+                        <a class="btn btn-xs btn-warning" href="{{ url('/users/revokeAdmin/' . $user->id) }}">Revoke Admin</a> 
+                    @else
+                        <a class="btn btn-xs btn-warning" href="{{ url('/users/becomeAdmin/' . $user->id) }}">Become Admin</a> 
+                    @endif
+                        @if($user->blocked)
+                            <a class="btn btn-xs btn-warning" href="{{ url('/users/unblocked/' . $user->id) }}">Unblock</a> 
+                        @else
+                           <a class="btn btn-xs btn-warning" href="{{ url('/users/blocked/' . $user->id) }}">Block</a> 
+                        @endif
+                    <a href="{{ url('/users/delete/' . $user->id) }}">
+                        <button class="btn btn-xs btn-danger" onclick="return confirm('Are you sure in delete this user?');">Delete</button>
+                    </a>
+                </td>
+            </tr>
+        @endif
     @endforeach
     </table>
 @else

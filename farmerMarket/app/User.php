@@ -13,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'location', 'profile_photo', 'profile_url', 'mime_type', 'presentation', 'admin'
+        'name', 'email', 'location', 'profile_photo', 'profile_url', 'mime_type', 'presentation', 'admin'
     ];
 
     /**
@@ -24,4 +24,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function advertisements()
+    {
+        return $this->hasMany('App\Advertisement', 'owner_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comments');
+    }
+
+    public function bids()
+    {
+        return $this->hasMany('App\Bids', 'buyer_id');
+    }
 }

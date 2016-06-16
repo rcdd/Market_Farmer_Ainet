@@ -1,5 +1,4 @@
                         {{ csrf_field() }}
-
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label required">Name</label>
 
@@ -32,7 +31,7 @@
                             <label class="col-md-4 control-label required">Password</label>
 
                             <div class="col-md-6">
-                                <input type="password" class="form-control" name="password" value="{{ old('password') }}">
+                                <input type="password" class="form-control" name="password" value="">
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -53,16 +52,6 @@
                                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-                        </div>
-
-                         <div class="form-group{{ $errors->has('admin') ? ' has-error' : '' }}">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="admin"  @if (old('admin') == 'on' OR $user->admin == 1)  checked @endif > Administrator
-                                    </label>
-                                </div>
                             </div>
                         </div>
 

@@ -75,9 +75,13 @@ trait ThrottlesLogins
      */
     protected function getLockoutErrorMessage($seconds)
     {
-        return Lang::has('auth.throttle')
+
+        $msg =  Lang::has('auth.throttle')
             ? Lang::get('auth.throttle', ['seconds' => $seconds])
             : 'Too many login attempts. Please try again in '.$seconds.' seconds.';
+            session()->flash('error','Too many login attempts. Please try again in '.$seconds.' seconds.');
+
+        return $msg;
     }
 
     /**

@@ -20,9 +20,11 @@ class CreateCommentsTable extends Migration
             $table->foreign('advertisement_id')->references('id')->on('advertisements');
 
             // set if this comment is a response
-            $table->integer('parent_id')->unsigned();
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->foreign('parent_id')->references('id')->on('comments');
 
+            $table->boolean('blocked')->default(false);
+            
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 

@@ -4,8 +4,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">@yield('title')</div>
                 <div class="panel-body">
             		<form class="form-horizontal" role="form" method="POST" action="{{ url('/users/update/'.$id) }}"  enctype="multipart/form-data">
                   		@include('auth.partials.form')
@@ -18,7 +16,6 @@
                         </div>
                   	</form>
                 </div>
-            </div>
         </div>
     </div>
 </div>

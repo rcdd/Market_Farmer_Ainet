@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('location');
             $table->string('profile_photo')->nullable();
+            $table->string('mime_type')->nullable();
             $table->string('profile_url')->nullable();
             $table->string('presentation')->nullable();
             $table->timestamps();

@@ -1,6 +1,5 @@
                         <?php echo e(csrf_field()); ?>
 
-
                         <div class="form-group<?php echo e($errors->has('name') ? ' has-error' : ''); ?>">
                             <label class="col-md-4 control-label required">Name</label>
 
@@ -33,7 +32,7 @@
                             <label class="col-md-4 control-label required">Password</label>
 
                             <div class="col-md-6">
-                                <input type="password" class="form-control" name="password" value="<?php echo e(old('password')); ?>">
+                                <input type="password" class="form-control" name="password" value="">
 
                                 <?php if($errors->has('password')): ?>
                                     <span class="help-block">
@@ -54,16 +53,6 @@
                                         <strong><?php echo e($errors->first('password_confirmation')); ?></strong>
                                     </span>
                                 <?php endif; ?>
-                            </div>
-                        </div>
-
-                         <div class="form-group<?php echo e($errors->has('admin') ? ' has-error' : ''); ?>">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="admin"  <?php if(old('admin') == 'on' OR $user->admin == 1): ?>  checked <?php endif; ?> > Administrator
-                                    </label>
-                                </div>
                             </div>
                         </div>
 

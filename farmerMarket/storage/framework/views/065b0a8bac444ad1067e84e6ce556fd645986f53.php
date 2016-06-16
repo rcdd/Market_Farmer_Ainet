@@ -3,8 +3,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading"><?php echo $__env->yieldContent('title'); ?></div>
                 <div class="panel-body">
             		<form class="form-horizontal" role="form" method="POST" action="<?php echo e(url('/users/update/'.$id)); ?>"  enctype="multipart/form-data">
                   		<?php echo $__env->make('auth.partials.form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
@@ -17,7 +15,6 @@
                         </div>
                   	</form>
                 </div>
-            </div>
         </div>
     </div>
 </div>
