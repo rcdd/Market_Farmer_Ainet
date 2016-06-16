@@ -62,6 +62,13 @@ Route::post('/advertisement/view/{id}/bid', ['middleware'=>'auth', 'uses' => 'Bi
 //search
 Route::post('/advertisement/index',['uses' => 'SearchController@mainSearch']);
 
+Route::post('/advertisement/index',['uses' => 'SearchController@advertisementSearch']);
+
+//orderBy
+//Route::get('/advertisement/index', function(){return View::make('orderAdvertisement');});
+
+Route::post('/advertisement/index', ['uses' => 'AdvertisementController@orderAdvertisement']);
+
 
 //miscelaneous
 Route::auth();
