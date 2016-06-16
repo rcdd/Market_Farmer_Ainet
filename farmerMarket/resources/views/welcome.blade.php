@@ -32,7 +32,7 @@
                                 <i class="fa fa-cloud fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
-                                    <strong>Service Name</strong>
+                                    <strong>Your cloud of fresh products</strong>
                                 </h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                             </div>
@@ -44,7 +44,7 @@
                                 <i class="fa fa-compass fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
-                                    <strong>Service Name</strong>
+                                    <strong>Independently of your location</strong>
                                 </h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                             </div>
@@ -56,7 +56,7 @@
                                 <i class="fa fa-flask fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
-                                    <strong>Service Name</strong>
+                                    <strong>Service quality</strong>
                                 </h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                             </div>
@@ -68,7 +68,7 @@
                                 <i class="fa fa-shield fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
-                                    <strong>Service Name</strong>
+                                    <strong>Certified entity</strong>
                                 </h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                             </div>

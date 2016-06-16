@@ -24,7 +24,7 @@ class AdvertisementController extends Controller
  
     public function destroy($id){
         Advertisement::destroy($id);
-        return redirect('/advertisement/view');
+        return redirect('/advertisement/index');
     }
  
     public function newAdvertisement(){
@@ -46,14 +46,15 @@ class AdvertisementController extends Controller
         $advertisement->save();
 
         //image field
-        $file = Request::file('photo_path');
-        $extension = $file->getClientOriginalExtension();
-        Storage::disk('local')->put("ads/" . $file->getFilename().'.'.$extension,  File::get($file));
- 
+        if($file = Request::file('photo_path')){
+                $extension = $file->getClientOriginalExtension();
+                Storage::disk('local')->put("ads/" . $file->getFilename().'.'.$extension,  File::get($file));
 
-        $media = new Media();
-        $media->mime_type = $file->getClientMimeType();
-        $media->photo_path = $file->getFilename().'.'.$extension;
+                $media = new Media();
+                $media->mime_type = $file->getClientMimeType();
+                $media->photo_path = $file->getFilename().'.'.$extension;
+        }
+       
 
         //$advertisement->integer('id')->unsigned();
         $media->advertisement_id = $advertisement->id;
