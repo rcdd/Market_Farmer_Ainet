@@ -47,7 +47,8 @@
                 </ul>
 
                 <div class="col-md-4">
-                    <form action="" class="search-form">
+                    <form action="/advertisement/index" method="POST" class="search-form">
+                    {{ csrf_field() }}
                         <div class="form-group has-feedback">
                             <label for="search" class="sr-only">Search</label>
                             <input type="text" class="form-control" name="mainSearch" id="mainSearch" placeholder="search">
