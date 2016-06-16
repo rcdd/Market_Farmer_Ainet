@@ -59,6 +59,10 @@ Route::get('/comment/unblock/{id}', ['middleware'=>'is.admin', 'uses' => 'Commen
 //bids
 Route::post('/advertisement/view/{id}/bid', ['middleware'=>'auth', 'uses' => 'BidsController@placeBid']);
 
+//search
+Route::get('/mainSearch',['uses' => 'SearchController@mainSearch']);
+
+
 //miscelaneous
 Route::auth();
 Route::get('/home', 'HomeController@index');

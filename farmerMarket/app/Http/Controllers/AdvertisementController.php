@@ -52,6 +52,97 @@ class AdvertisementController extends Controller
         $ads = new Advertisement();
         return view('advertisements.new', ['ads' => $ads, 'title' => "New Advertisement"]);
     }
+
+     public function orderAdvertisement(){
+
+        $order = Input::get('order');
+
+        if($order == "1"){
+            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                {
+                    $query->orderBy('name', 'asc');
+                })->get();
+
+            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+        } else if($order == "2"){
+            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                {
+                    $query->orderBy('name', 'desc');
+                })->get();
+
+            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+        }
+         else if($order == "3"){
+            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                {
+                    $query->orderBy('price_cents', 'asc');
+                })->get();
+
+            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+        } else if($order == "4"){
+            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                {
+                    $query->orderBy('price_cents', 'desc');
+                })->get();
+
+            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+        } else if($order == "5"){
+            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                {
+                    $query->orderBy('name', 'desc');
+                })->get();
+
+            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+        } else if($order == "6"){
+            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                {
+                    $query->orderBy('name', 'desc');
+                })->get();
+
+            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+        } else if($order == "7"){
+            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                {
+                    $query->orderBy('name', 'desc');
+                })->get();
+
+            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+        } else if($order == "8"){
+            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                {
+                    $query->orderBy('name', 'desc');
+                })->get();
+
+            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+        } else if($order == "9"){
+            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                {
+                    $query->orderBy('name', 'desc');
+                })->get();
+
+            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+        } else if($order == "10"){
+            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                {
+                    $query->orderBy('name', 'desc');
+                })->get();
+
+            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+        }
+    }
+
+    public function searchAdvertisement(){
+
+        $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+            {
+                $query->whereDate('available_until', '>', date('Y-m-d'))
+                    ->orWhere('available_until', '=', null);
+            })->get();
+
+        return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+    }
+ 
+ 
  
     public function add(Request $request) {
         

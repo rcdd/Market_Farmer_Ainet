@@ -8,14 +8,21 @@
                 <a href="/advertisement/new"><button class="btn btn-success">New advertisement</button></a>
             </div>
             <div class="col-md-2">
-                <select class="form-control">
+                <select name="order" class="form-control">
                     <option value="0" selected>Filter By</option>
-                    <option value="1">Product Name</option>
-                    <option value="1">Price</option>
-                    <option value="2">Date Offering</option>
-                    <option value="3">Seller's Name</option>
-                    <option value="4">Seller's Score</option>
+                    <option value="1">Product Name (Asc)</option>
+                    <option value="2">Product Name (Desc)</option>
+                    <option value="3">Price (Asc)</option>
+                    <option value="4">Price (Desc)</option>
+                    <option value="5">Date Offering (Asc)</option>
+                    <option value="6">Date Offering (Desc)</option>
+                    <option value="7">Seller's Name (Asc)</option>
+                    <option value="8">Seller's Name (Desc)</option>
+                    <option value="9">Seller's Score (Asc)</option>
+                    <option value="10">Seller's Score (Desc)</option>
                 </select>
+
+                
 
             </div>
             <div class="col-md-5">
