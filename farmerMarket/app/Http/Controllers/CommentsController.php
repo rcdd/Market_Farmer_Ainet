@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\Comments;
+use Auth;
 
 class CommentsController extends Controller
 {
@@ -36,10 +37,10 @@ class CommentsController extends Controller
     public function delete($id){
         $com = Comments::findOrFail($id);
 
-        if($com->user_id != Auth::id() || Auth::user()->admin){
+        /*if($com->user_id != Auth::id() || !Auth::user()->admin){
             session()->flash('error','Resource not allowed to you!');
             return redirect('/');
-        }
+        }*/
 
         if(count($com->hasReplay()) > 0){
             $com->hasReplay()->delete();
