@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use LithiumDev\TagCloud\TagCloud;
-
-class TagsController extends Controller
+class Advertisement_tagController extends Controller
 {
-    
+    //
 }

@@ -5,6 +5,7 @@
     <div id="topWelcomePage">
     <img src="{{ url('/assets/bg2.jpg') }}">
     </div>
+    
 
     <section id="about" class="about">
         <div class="container">

@@ -141,22 +141,59 @@
           </div>
           <div class="modal-body">  
             <div class="container">
-                <div class="col-sm-5 col-md-6">
+
+                <div class="col-sm-5 col-md-6" align="left">
+
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/advertisement/view/' . $ads->id . '/bid') }}">
                      {{ csrf_field() }}
-                    <p><label class="control-label" for="lastBid">Last Bid: </label> {{
-                    $ads->lastBid() ? $ads->lastBid() : $ads->price_cents}}€ </p>
-                    <label class="control-label" for="price_cents">Value to bid: </label> <input type="text" name="price_cents" id="price_cents">
-                    <label class="control-label" for="trade_prefs">Trade Prefs: </label> <input type="text" name="trade_prefs" id="trade_prefs">
 
-                    <label class="control-label" for="quantity">Quantity: </label> <input type="text" name="quantity" id="quantity">
-                    <label class="control-label" for="trade_location">Trade Location: </label> <input type="text" name="trade_location" id="trade_location">
-                    <label class="control-label" for="comment">Comments: </label> <textarea name="comment" id="comment"></textarea>
+                        <div class="form-group">
+                            <p><label class="control-label col-md-3" for="lastBid">Last Bid:  {{
+                            $ads->lastBid() ? $ads->lastBid() : $ads->price_cents}}€ </label> </p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="price_cents">Value to bid: </label> 
+                                <div class="col-md-7">
+                                    <input type="text" name="price_cents" id="price_cents" class="form-control" placeholder="Enter a value">
+                            </div>        
+                        </div> 
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="trade_prefs">Trade Prefs: </label> 
+                                <div class="col-md-7">
+                                     <input type="text" name="trade_prefs" id="trade_prefs" class="form-control" placeholder="Trade Prefs">
+                             </div>        
+                        </div> 
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="quantity">Quantity: </label> 
+                                <div class="col-md-7">
+                                    <input type="text" name="quantity" id="quantity" class="form-control" placeholder="Quantity">
+                                </div>        
+                        </div> 
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="trade_location">Trade Location: </label> 
+                                <div class="col-md-7">
+                                    <input type="text" name="trade_location" id="trade_location" class="form-control" placeholder="Location">
+                                </div>        
+                        </div> 
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="comment">Comments: </label> 
+                                <div class="col-md-7">
+                                    <textarea name="comment" id="comment" class="form-control" placeholder="Enter a comment"></textarea>
+                                </div>        
+                        </div> 
+
+
                     <br/><br/>
                     <button type="submit" class="btn btn-success">
                         <i class="fa fa-gavel"></i>Place a Bid
                     </button>
                     </form>
+
                 </div>
             </div>
         </div>

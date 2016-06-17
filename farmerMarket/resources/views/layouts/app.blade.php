@@ -35,7 +35,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Market Farms
+                    Urban Farmers' Market
                 </a>
             </div>
 

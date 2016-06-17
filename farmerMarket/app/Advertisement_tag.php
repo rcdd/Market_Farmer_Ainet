@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tags extends Model
+class Advertisement_tag extends Model
 {
-	protected $fillable = [
+	protected $table = 'advertisement_tag';
+
+    protected $fillable = [
         'advertisement_id', 'tag_id'
     ];
 

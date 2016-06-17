@@ -25,6 +25,13 @@
                         </div>
                     </div>
 
+                    <!--<div class="form-group">
+                        <label class="col-md-3 control-label" for="tag_name">Tag Name</label>
+                        <div class="col-md-9">
+                            <input id="tag_name" name="tag_name" type="text" placeholder="Tag Name" class="form-control input-md" value="{{ old('tag_name', $ads->tag_name) }}">
+                        </div>
+                    </div>-->
+
                      <div class="form-group">
                         <label class="col-md-3 control-label" for="photo_path">Image</label>
                         <div class="col-md-9">

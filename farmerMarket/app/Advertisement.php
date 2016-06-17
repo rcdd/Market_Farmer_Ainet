@@ -36,9 +36,9 @@ class Advertisement extends Model
        return $this->hasOne('App\Bids')->where('status', '=' , '1')->max('price_cents');
     }
 
-    public function tags()
+    public function tag()
     {
-        return $this->belongsToMany('App\Tags');
+        return $this->hasMany('App\Advertisement_tag');
     }
 
 }

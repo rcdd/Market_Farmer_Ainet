@@ -45,6 +45,7 @@ Route::get('/bids/delete/{id}', ['middleware'=>'auth','uses' => 'BidsController@
 Route::get('/bids/accept/{id}', ['middleware'=>'auth','uses' => 'BidsController@acceptBid']);
 Route::get('/bids/refuse/{id}', ['middleware'=>'auth','uses' => 'BidsController@refuseBid']);
 Route::post('/bids/change', ['middleware'=>'auth','uses' => 'BidsController@changeBid']);
+Route::post('/advertisement/view/{id}/bid', ['middleware'=>'auth', 'uses' => 'BidsController@placeBid']);
 
 // images 
 Route::get('/images/profile/{id}', 'MediaController@getImageProfile');
@@ -56,8 +57,7 @@ Route::get('/comment/delete/{id}', ['middleware'=>'auth', 'uses' => 'CommentsCon
 Route::get('/comment/block/{id}', ['middleware'=>'is.admin', 'uses' => 'CommentsController@block']);
 Route::get('/comment/unblock/{id}', ['middleware'=>'is.admin', 'uses' => 'CommentsController@unBlock']);
 
-//bids
-Route::post('/advertisement/view/{id}/bid', ['middleware'=>'auth', 'uses' => 'BidsController@placeBid']);
+
 
 //search
 Route::get('/mainSearch',['uses' => 'SearchController@mainSearch']);

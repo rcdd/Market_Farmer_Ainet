@@ -14,6 +14,7 @@ use App\Media;
 use App\Advertisement;
 use App\Comments;
 use App\User;
+use App\Tags;
 use Auth;
 
 class AdvertisementController extends Controller
@@ -145,13 +146,14 @@ class AdvertisementController extends Controller
  
  
     public function add(Request $request) {
-        
+        //echo var_dump($request);
         $rules = array(
             'name'  => 'Required|Min:3|Max:80',
             'available_on'     => 'Required|date',
             'available_until'  =>'date|after:available_on|after:today',
             'price_cents' => 'required_without_all:trade_prefs',
             'trade_prefs' => 'required_without_all:price_cents',
+            //'tag_name' => 'Min:3|Max:80',
             'quantity' => 'required',
         );
 
@@ -163,7 +165,12 @@ class AdvertisementController extends Controller
             return redirect()->back();
         }
 
+        
+
+
         $advertisement  = new Advertisement();
+        //$advertisement->tag->$input[];
+
         $advertisement->owner_id= $input['owner_id'];
         $advertisement->name = $input['name'];
         $advertisement->description =$input['description'];
