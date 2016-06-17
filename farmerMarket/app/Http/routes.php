@@ -60,14 +60,14 @@ Route::get('/comment/unblock/{id}', ['middleware'=>'is.admin', 'uses' => 'Commen
 Route::post('/advertisement/view/{id}/bid', ['middleware'=>'auth', 'uses' => 'BidsController@placeBid']);
 
 //search
-Route::post('/advertisement/index',['uses' => 'SearchController@mainSearch']);
+Route::post('/advertisement/mainSearch',['uses' => 'SearchController@mainSearch']);
 
-Route::post('/advertisement/index',['uses' => 'SearchController@advertisementSearch']);
+Route::post('/advertisement/search',['uses' => 'SearchController@advertisementSearch']);
 
 //orderBy
 //Route::get('/advertisement/index', function(){return View::make('orderAdvertisement');});
 
-Route::post('/advertisement/index', ['uses' => 'AdvertisementController@orderAdvertisement']);
+Route::post('/advertisement/ordered', ['uses' => 'AdvertisementController@orderAdvertisement']);
 
 
 //miscelaneous

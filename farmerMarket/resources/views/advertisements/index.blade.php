@@ -55,7 +55,7 @@
                                     <form class="form-horizontal" role="form" action="/advertisement/index" enctype="multipart/form-data" method="POST">
                                       <div class="form-group">
                                         <label for="contain">Seller Name</label>
-                                        <input class="form-control" type="text" />
+                                        <input class="form-control" type="text" name="seller_name" id="seller_name" />
                                       </div>
                                       <label for="filter">Scores</label> 
                                       <div class="form-group checkbox">
@@ -77,11 +77,11 @@
                                       </div>
                                       <div class="form-group">
                                         <label for="contain">Location</label>
-                                        <input class="form-control" type="text" />
+                                        <input class="form-control" type="text" name="location" id="location" />
                                       </div>
                                       <div class="form-group">
                                         <label for="contain">Tags</label>
-                                        <input class="form-control" type="text" />
+                                        <input class="form-control" type="text" name="tags" id="tags" />
                                       </div>
                                       <button type="submit" name="advertisementSearch" id="advertisementSearch" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                     </form>
