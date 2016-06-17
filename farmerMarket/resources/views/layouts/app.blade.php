@@ -101,12 +101,39 @@
                 {{Session::reflash()}}
                 <div class="panel-heading">{{isset($title) ? $title : "" }}</div>
                 <div class="panel-body">
-    @yield('content')
-</div></div></div>
+                     @yield('content')
+                </div>
+            </div>
+        </div>
+        <section id="contact">
+            <footer class ="footer services bg-primary">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2 text-center">
+                            <h2 class="section-heading">Let's Get In Touch!</h2>
+                            <hr class="primary">
+                            <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                        </div>
+                        <div class="col-lg-4 col-lg-offset-2 text-center">
+                            <i class="fa fa-phone fa-3x wow bounceIn" style="visibility: visible; animation-name: bounceIn;"></i>
+                            <p>123-456-6789</p>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: bounceIn;"></i>
+                            <p><a >market@marketFrams.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </section>
+
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+    
+
 
 </body>
 </html>
