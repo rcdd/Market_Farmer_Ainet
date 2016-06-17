@@ -54,82 +54,110 @@ class AdvertisementController extends Controller
         return view('advertisements.new', ['ads' => $ads, 'title' => "New Advertisement"]);
     }
 
-     public function orderAdvertisement(){
 
-        $order = Input::get('order');
 
-        if($order == "1"){
-            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
-                {
-                    $query->orderBy('name', 'asc');
-                })->get();
+    public function orderAdvertisement(){
 
-            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
-        } else if($order == "2"){
-            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
-                {
-                    $query->orderBy('name', 'desc');
-                })->get();
 
-            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+        if (Request::ajax()) {
+
+            $order['input'] = Input::get('dataString');
+
+                if($order == "1"){
+
+        //Por Nome
+
+                    $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                        {
+                            $query->orderBy('name', 'asc');
+                        })->get();
+
+                    return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+                } else if($order == "2"){
+                    $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                        {
+                            $query->orderBy('name', 'desc');
+                        })->get();
+
+                    return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+                } else if($order == "3"){
+
+        //Por Preço
+
+                    $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                        {
+                            $query->orderBy('price_cents', 'asc');
+                        })->get();
+
+                    return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+                } else if($order == "4"){
+
+                    $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                        {
+                            $query->orderBy('price_cents', 'desc');
+                        })->get();
+
+                    return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+                } else if($order == "5"){
+
+        //Por disponibilidade
+
+                    $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                        {
+                            $query->orderBy('available_on', 'asc');
+                        })->get();
+
+                    return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+                } else if($order == "6"){
+
+                    $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                        {
+                            $query->orderBy('available_on', 'desc');
+                        })->get();
+
+                    return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+                } else if($order == "7"){
+
+        //Por Nome Vendedor
+
+                    $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                        {
+                            $query->join('users', 'advertisements.owner_id', '=', 'users.id')
+                                ->orderBy('users.name', 'asc');
+                        })->get();
+
+                    return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+                } else if($order == "8"){
+
+                    $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                        {
+                            $query->join('users', 'advertisements.owner_id', '=', 'users.id')
+                                ->orderBy('users.name', 'desc');
+                        })->get();
+
+                    return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+                } else if($order == "9"){
+
+        //Por Pontuação Vendedor
+
+                    $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                        {
+                            $query->join('users', 'advertisements.owner_id', '=', 'users.id')
+                                ->orderBy('users.sells_evals', 'asc');
+                        })->get();
+
+                    return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+                } else if($order == "10"){
+                    $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
+                        {
+                            $query->join('users', 'advertisements.owner_id', '=', 'users.id')
+                                ->orderBy('User.sells_evals', 'desc');
+                        })->get();
+
+                    return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
+                }
         }
-         else if($order == "3"){
-            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
-                {
-                    $query->orderBy('price_cents', 'asc');
-                })->get();
 
-            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
-        } else if($order == "4"){
-            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
-                {
-                    $query->orderBy('price_cents', 'desc');
-                })->get();
-
-            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
-        } else if($order == "5"){
-            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
-                {
-                    $query->orderBy('name', 'desc');
-                })->get();
-
-            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
-        } else if($order == "6"){
-            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
-                {
-                    $query->orderBy('name', 'desc');
-                })->get();
-
-            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
-        } else if($order == "7"){
-            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
-                {
-                    $query->orderBy('name', 'desc');
-                })->get();
-
-            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
-        } else if($order == "8"){
-            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
-                {
-                    $query->orderBy('name', 'desc');
-                })->get();
-
-            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
-        } else if($order == "9"){
-            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
-                {
-                    $query->orderBy('name', 'desc');
-                })->get();
-
-            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
-        } else if($order == "10"){
-            $advertisements = Advertisement::where('blocked', '=', '0')->where(function($query)
-                {
-                    $query->orderBy('name', 'desc');
-                })->get();
-
-            return view('advertisements.index', ['advertisements' => $advertisements, 'title' => "List of Advertisements"]);
-        }
     }
 
     public function searchAdvertisement(){

@@ -2,15 +2,34 @@
 
 @section('content')
 
+<script>
+    $(document).ready(function() {
+        $("#order").change(function() {
+             alert($('#order option:selected').val());
+            $.ajax({
+                type: 'POST',
+                url: 'http://market.project/advertisement/index',
+                data: {'dataString': $('#order option:selected').val()},
+                cache: false,
+                success: function(data)
+                {
+                    alert(data);
+                }
+            });
+        });
+    });
+
+</script>
+
 <div class="container">
         <div class="row col-md-12">
             <div class="col-md-2">
                 <a href="/advertisement/new"><button class="btn btn-success">New advertisement</button></a>
             </div>
             <div class="col-md-2">
-                <select name="order" class="form-control">
-                    <option value="0" selected>Filter By</option>
-                    <option value="1">Product Name (Asc)</option>
+                <select name="order" id="order" class="form-control" onchange="(this.value)">
+                    <option value="0">Filter By</option>
+                    <option value="1" selected>Product Name (Asc)</option>
                     <option value="2">Product Name (Desc)</option>
                     <option value="3">Price (Asc)</option>
                     <option value="4">Price (Desc)</option>
@@ -27,16 +46,16 @@
             </div>
             <div class="col-md-5">
                 <div class="input-group" id="adv-search">
-                    <input type="text" class="form-control" placeholder="Search by" />
+                    <input type="text" class="form-control" readonly placeholder="Search by" />
                     <div class="input-group-btn">
                         <div class="btn-group" role="group">
                             <div class="dropdown dropdown-lg">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <form class="form-horizontal" role="form">
+                                    <form class="form-horizontal" role="form" action="/advertisement/index" enctype="multipart/form-data" method="POST">
                                       <div class="form-group">
                                         <label for="contain">Seller Name</label>
-                                        <input class="form-control" type="text" />
+                                        <input class="form-control" type="text" name="seller_name" id="seller_name" />
                                       </div>
                                       <label for="filter">Scores</label> 
                                       <div class="form-group checkbox">
@@ -58,13 +77,13 @@
                                       </div>
                                       <div class="form-group">
                                         <label for="contain">Location</label>
-                                        <input class="form-control" type="text" />
+                                        <input class="form-control" type="text" name="location" id="location" />
                                       </div>
                                       <div class="form-group">
                                         <label for="contain">Tags</label>
-                                        <input class="form-control" type="text" />
+                                        <input class="form-control" type="text" name="tags" id="tags" />
                                       </div>
-                                      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                      <button type="submit" name="advertisementSearch" id="advertisementSearch" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                                     </form>
                                 </div>
                             </div>

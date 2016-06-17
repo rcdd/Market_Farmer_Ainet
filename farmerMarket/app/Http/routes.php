@@ -53,14 +53,21 @@ Route::get('/images/ads/{id}', 'MediaController@getImageAds');
 
 //comments
 Route::post('/comment/new', ['middleware'=>'auth', 'uses' => 'CommentsController@insert']);
-Route::get('/comment/delete/{id}', ['middleware'=>'auth', 'uses' => 'CommentsController@delete']);
+Route::get('/comment/delete/{id}', ['middleware'=>'is.admin', 'uses' => 'CommentsController@delete']);
 Route::get('/comment/block/{id}', ['middleware'=>'is.admin', 'uses' => 'CommentsController@block']);
 Route::get('/comment/unblock/{id}', ['middleware'=>'is.admin', 'uses' => 'CommentsController@unBlock']);
 
 
 
 //search
-Route::get('/mainSearch',['uses' => 'SearchController@mainSearch']);
+Route::post('/advertisement/mainSearch',['uses' => 'SearchController@mainSearch']);
+
+Route::post('/advertisement/search',['uses' => 'SearchController@advertisementSearch']);
+
+//orderBy
+//Route::get('/advertisement/index', function(){return View::make('orderAdvertisement');});
+
+Route::post('/advertisement/ordered', ['uses' => 'AdvertisementController@orderAdvertisement']);
 
 
 //miscelaneous
